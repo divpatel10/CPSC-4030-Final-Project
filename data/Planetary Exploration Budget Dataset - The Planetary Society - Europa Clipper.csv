@@ -1,0 +1,27 @@
+Official LCC,Fiscal Year,Pre-Formulation,Formulation,Implementation (incl LV),Launch Vehicle,Operations,Total Cost,Total Cost (inflation adj),Notes
+"$4,250.0",2013,$69.7,,,,,,,"Pre-formulation not included in project totals, but included here for reference"
+,2014,$80.0,,,,,,,
+,2015,,$100.0,,,,$100.0,$110.2,Phase A start: Apr 2015
+,2016,,$146.3,,,,$146.3,$159.0,
+,2017,,$237.4,,,,$237.4,$253.3,KDP-B Feb 2017
+,2018,,$525.0,,,,$525.0,$546.5,
+,2019,,$195.7,$349.3,,,$545.0,$555.9,KDP-C: Aug 2019
+,2020,,,$592.6,,,$592.6,$592.6,
+,2021,,,$434.8,,,$434.8,$434.8,
+,2022,,,$472.1,,,$472.1,$472.1,
+,2023,,,$305.0,,,$305.0,$305.0,
+,2024,,,$240.0,,,$240.0,$240.0,
+,2025,,,,,$110.1,$110.1,$110.1,Planned launch: October 2024
+,2026,,,,,$90.1,$90.1,$90.1,
+,2027,,,,,$57.6,$57.6,$57.6,
+,2028,,,,,$57.6,$57.6,$57.6,
+,2029,,,,,$57.6,$57.6,$57.6,
+,2030,,,,,$57.6,$57.6,$57.6,
+,2031,,,,,$57.6,$57.6,$57.6,
+,2032,,,,,$57.6,$57.6,$57.6,
+,2033,,,,,$57.6,$57.6,$57.6,
+,2034,,,,,$57.6,$57.6,$57.6,
+,2035,,,,,$57.6,$57.6,$57.6,
+Totals,,,"$1,219.0","$2,393.8",$178,$718.2,"$4,316.4","$4,316.4","Using reported formulation total, which differs slightly from calculated sum"
+,,,34%,66%,,17%,,,% dev spent on formulation vs. implementation. % TOTAL on operations
+,,,,,,,,,LV cost: https://www.nasa.gov/press-release/nasa-awards-launch-services-contract-for-europa-clipper-mission

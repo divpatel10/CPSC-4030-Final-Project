@@ -1,0 +1,14 @@
+Official LCC,Fiscal Year,Formulation,Implementation (incl LV),Launch Services,Operations,Total Cost,Total Cost (inflation adj),Notes
+"$2,726",2013,$78.4,,,,$78.4,$89.9,Formulation start: Nov 2013.
+,2014,$85.3,,,,$85.3,$95.9,"Calculate from subtracting ""Prior"" spending amount and reported values from FYs14 and 15"
+,2015,$110.6,,,,$110.6,$121.9,Values include non-SMD formulation costs
+,2016,$118.8,$227.7,,,$346.5,$376.6,KDP-C Jun 2016. Frrmulation amount includes non-SMD formulation costs
+,2017,,$425.2,,,$425.2,$453.7,
+,2018,,$536.6,,,$536.6,$558.6,
+,2019,,$515.3,,,$515.3,$525.6,
+,2020,,$330.3,,$22.7,$353.0,$353.0,Launch: 30 July 2020
+,2021,,$34.3,,$115.7,$150.0,$150.0,Landing: 18 Feb 2021
+,2022,,,,$95.7,$95.7,$95.7,
+,2023,,,,$60.0,$60.0,$60.0,End of prime mission
+Totals,,$393.2,"$2,069.4",$243.0,$294.1,"$2,756.7","$2,881.0",Launch costs from: https://www.nasa.gov/press-release/nasa-awards-launch-services-contract-for-mars-2020-rover-mission/
+,,16%,84%,,11%,,,% dev spent on formulation vs. implementation. % TOTAL on operations
