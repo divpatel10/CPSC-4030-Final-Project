@@ -1,16 +1,36 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8"/>
-    <title>Bar chart D3</title>
+<head>
+    <meta charset="utf-8">
     <script src="https://d3js.org/d3.v7.min.js"></script>
-  </head>
-  <body>
 
-    <h1>4030 Final Project</h1>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
 
+<body>
+
+  <div class = "maingraph">
+
+    <h1>Graph of All the missions following their costs</h1>
+    
+    <svg id="main-graph" width="1500" height="990"></svg>
+    <script src="script.js"></script>
+  </div>
+
+  <div class="secondgraph">
     <svg id="barchart"></svg>
+    <select id="names">
+      <option>Spacecraft Development</option>
+      <option>Launch Support</option>
+      <option>Civil Service Compensation</option>
+      <option>Total Development</option>
+      <option>Tracking & Data Support</option>
+      <option>Operations</option>
+      <option>Total Cost</option>
+      <option>Total Cost (inflation adj.)</option>
+    </select>
 
     <script src="script.js"></script>
-  </body>
-</html>
+    <script src="script-g2.js"></script>
+  </div>
+
+</body>

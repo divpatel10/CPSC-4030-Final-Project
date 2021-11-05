@@ -1,1 +1,28 @@
-{}
+body {
+    margin:auto;
+   /* width: 885px;*/
+    font: 10px arial;
+    padding: 25px;
+    background-color: rgb(236, 236, 236);
+}
+.y-axis line {
+    opacity:.2;
+}
+.y-axis path {
+    display:none;
+}
+.line {
+    fill: none;
+    stroke-width: 3px;
+    opacity:.75;
+}
+.overlay {
+    fill: rgb(15, 15, 15);
+    opacity: .3;
+}
+
+
+.maingraph h1{ 
+    text-align: center;
+    margin-left: -300px;
+}
