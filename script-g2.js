@@ -26,8 +26,8 @@ function buildGraph(dataset, title) {
     width: 800,
     height: 800,
     margin: {
-      top: 50,
-      bottom: 100,
+      top: 70,
+      bottom: 50,
       right: 50,
       left: 100,
     },

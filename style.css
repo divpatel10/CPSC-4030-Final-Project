@@ -27,19 +27,15 @@ body {
     margin-left: -300px;
 }
 
-.secondary-graph{
-    display: inline; 
-}
 .secondgraph{
-    display: inline; 
     float:left;
+    height: 900px;
 
 }
 .graph3{
-    display: inline; 
     float: right;
 
 }
 .names{
-    float:left;
+    display: inline-flex;
 }

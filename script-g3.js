@@ -1,7 +1,7 @@
 
 const margin = {top: 30, right: 30, bottom: 95, left: 60},
-width = 460 - margin.left - margin.right,
-height = 500 - margin.top - margin.bottom;
+width = 950 - margin.left - margin.right,
+height = 804 - margin.top - margin.bottom;
 
 
 const svg = d3.select("#graph3")
