@@ -11,11 +11,13 @@ d3.csv("Cassini.csv").then(function (dataset) {
 });
 
 function buildGraph(dataset, title) {
-  console.log(dataset);
 
   var cleanNumber = (n) => +n.slice(1, n.length).replaceAll(",", "");
   var xAccessor = (d) => +d["Fiscal Year"];
   var yAccessor = (d) => cleanNumber(d[title]);
+
+
+
   var values = Array();
   for (var i = 0; i < dataset.length; i++) {
     values.push(cleanNumber(dataset[i][title]));
@@ -57,6 +59,7 @@ function buildGraph(dataset, title) {
     .domain(years)
     .range([dimensions.margin.left, dimensions.width - dimensions.margin.right])
     .padding(0.4);
+    console.log(values)
   yScale = d3
     .scaleLinear()
     .domain([0, d3.max(values)])
@@ -81,7 +84,7 @@ function buildGraph(dataset, title) {
       (d) => dimensions.height - dimensions.margin.bottom - yScale(yAccessor(d))
     )
     .attr("fill", "#0277bd");
-
+      console.log(dataset)
   var xAxisgen = d3.axisBottom().scale(xScale);
   var yAxisgen = d3.axisLeft().scale(yScale).ticks(25);
 
