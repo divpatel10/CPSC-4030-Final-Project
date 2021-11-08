@@ -26,7 +26,7 @@ function buildGraph(dataset, title) {
     width: 800,
     height: 800,
     margin: {
-      top: 70,
+      top: 50,
       bottom: 50,
       right: 50,
       left: 100,
@@ -42,7 +42,7 @@ function buildGraph(dataset, title) {
     .style("fill", "black")
     .attr("text-anchor", "middle")
     .attr("dx", dimensions.width / 2)
-    .attr("dy", dimensions.margin.top)
+    .attr("dy", dimensions.margin.top-25)
     .text(title + " costs of " + "Cassini");
   var xAxisTitle = svg
     .append("text")
@@ -54,6 +54,9 @@ function buildGraph(dataset, title) {
     .text("Fiscal Year");
 
   var years = dataset.map(xAccessor);
+  // console.log(values.indexOf(143))
+
+
   xScale = d3
     .scaleBand()
     .domain(years)
