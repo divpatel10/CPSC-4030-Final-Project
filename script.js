@@ -1,4 +1,4 @@
-d3.csv("main-data.csv").then(function(data) {
+d3.csv("main-data-inflation.csv").then(function(data) {
 
         
 
@@ -6,12 +6,21 @@ d3.csv("main-data.csv").then(function(data) {
     var keys = data.columns.slice(1);
     console.log(keys);
 
-    var parseTime = d3.timeParse("%Y")
-
+    var parseTime = d3.timeParse("%Y"),
+        formatDate = d3.timeFormat("%Y"),
+        bisectDate = d3.bisector(d => d.date).left,
+        formatValue = d3.format(",.0f");
     data.forEach(function(d) {
         d.date = parseTime(d.Date);
         return d;
     }) 
+
+    
+    // Filter function to remove the apollo mission data from the dataset 
+    console.log(data.filter(function(d) {
+        delete d.Apollo;
+        return d;
+    }))
 
     
 
@@ -59,13 +68,33 @@ d3.csv("main-data.csv").then(function(data) {
         .attr("class", "y-axis")
         .attr("transform", "translate(" + margin.left + ",0)");
 
+    var focus = svg.append("g")
+             .attr("class", "focus")
+             .style("display", "none");
+
+    focus.append("line").attr("class", "lineHover")
+        .style("stroke", "#999")
+        .attr("stroke-width", 1)
+        .style("shape-rendering", "crispEdges")
+        .style("opacity", 0.5)
+        .attr("y1", -height)
+        .attr("y2",0);
+
+    focus.append("text").attr("class", "lineHoverDate")
+        .attr("text-anchor", "middle")
+        .attr("font-size", 15);                
+
     var overlay = svg.append("rect")
         .attr("class", "overlay")
         .attr("x", margin.left)
         .attr("width", width - margin.right - margin.left)
         .attr("height", height)
 
-  
+        
+
+        var copy = keys.filter(f => f.includes("_1"))
+        var copy = keys;
+
         var missionWiseData = keys.map(function(id) {
             return {
                 id: id,
@@ -94,6 +123,7 @@ d3.csv("main-data.csv").then(function(data) {
             .merge(mission)
             .attr("d", d => line(d.values))
         
+            tooltip(copy);
         var legend = svg.selectAll('.legend')
             .data(keys)
             .enter()
@@ -121,6 +151,74 @@ d3.csv("main-data.csv").then(function(data) {
             .text(function(d) {
                 return d;
             });
-    
+
+
+            function tooltip(copy) {
+
+                    var labels = focus.selectAll(".lineHoverText")
+                        .data(copy)
+        
+                    labels.enter().append("text")
+                        .attr("class", "lineHoverText")
+                        .style("fill", d => color(d))
+                        .attr("text-anchor", "start")
+                        .attr("font-size",12)
+                        .attr("dy", (_, i) => 1 + i * 1 + "em")
+                        .merge(labels);
+        
+                    var circles = focus.selectAll(".hoverCircle")
+                        .data(copy)
+        
+                        // draw circles on hovered column
+                    circles.enter().append("circle")
+                        .attr("class", "hoverCircle")
+                        .style("fill", d => color(d))
+                        .attr("r", 5)
+                        .merge(circles);
+        
+                    svg.selectAll(".overlay")
+                        .on("mouseover", function() { focus.style("display", null); })
+                        .on("mouseout", function() { focus.style("display", "none"); })
+                        .on("mousemove", mousemove);
+        
+                    function mousemove() {
+                            
+                        console.log(d3.pointer(event)[0])
+                        var x0 = x.invert(d3.pointer(event)[0]),
+                            i = bisectDate(data, x0, 1),
+                            d0 = data[i - 1],
+                            d1 = data[i];
+                            var d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+                        // Draw a vertical line on hover
+                        focus.select(".lineHover")
+                            .attr("transform", "translate(" + x(d.date) + "," + height + ")");
+                        
+                        focus.select(".lineHoverDate")
+                            .attr("transform",
+                                "translate(" + x(d.date) + "," + (height + margin.bottom) + ")")
+                            .text(formatDate(d.date));
+        
+                        focus.selectAll(".hoverCircle")
+                            .attr("cy", e => y(d[e]))
+                            .attr("cx", x(d.date));
+
+                        focus.selectAll(".lineHoverText")
+                            .attr("transform",
+                                "translate(" + (x(d.date)) + "," + height/10  + ")")
+                            .text(e => e + " : " + "$" + formatValue(d[e]) + "Million" )
+                			.style("display",function(e){
+                				return d[e] > 0 ? "block" : "none";    // show only the missions that are greater than 0
+                			});
+                            
+                            // shift text to left after crossing 3/4th the width
+                        x(d.date) > (width - width / 4)
+                            ? focus.selectAll("text.lineHoverText")
+                                .attr("text-anchor", "end")
+                                .attr("dx", 10)
+                            : focus.selectAll("text.lineHoverText")
+                                .attr("text-anchor", "start")
+                                .attr("dx", 10)
+                    }
+                }
 
 });

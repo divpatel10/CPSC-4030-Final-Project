@@ -18,7 +18,10 @@ body {
 }
 .overlay {
     fill: rgb(15, 15, 15);
-    opacity: .3;
+    opacity: 0;
+}
+.lineHoverText{
+    font-size: 15px;
 }
 
 
