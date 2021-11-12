@@ -1,10 +1,10 @@
 
-const margin = {top: 30, right: 30, bottom: 95, left: 60},
+var margin = {top: 30, right: 30, bottom: 95, left: 60},
 width = 950 - margin.left - margin.right,
 height = 804 - margin.top - margin.bottom;
 
 
-const svg = d3.select("#graph3")
+var svg = d3.select("#graph3")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)

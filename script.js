@@ -1,224 +1,158 @@
-d3.csv("main-data-inflation.csv").then(function(data) {
+const margin = {top: 60, right: 230, bottom: 60, left: 50},
+    width = screen.width - margin.left - margin.right - 500,
+    height = (screen.height/(3/2)) - margin.top - margin.bottom;
 
-        
+// append the svg object to the body of the page
+const svg = d3.select("#main-graph")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          `translate(${margin.left}, ${margin.top})`);
+
+// Parse the Data
+d3.csv("main-data-inflation.csv").then( function(data) {
+
+  var keys = data.columns.slice(1)
 
 
-    var keys = data.columns.slice(1);
-    console.log(keys);
-
-    var parseTime = d3.timeParse("%Y"),
-        formatDate = d3.timeFormat("%Y"),
-        bisectDate = d3.bisector(d => d.date).left,
-        formatValue = d3.format(",.0f");
-    data.forEach(function(d) {
-        d.date = parseTime(d.Date);
-        return d;
-    }) 
-
-    
     // Filter function to remove the apollo mission data from the dataset 
     console.log(data.filter(function(d) {
         delete d.Apollo;
         return d;
     }))
 
+    // Add X axis
+    var x = d3.scaleLinear()
+    .domain(d3.extent(data, function(d) { return d.year; }))
+    .range([ 0, width ]);
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x).ticks(5));
+    // Customization
+    svg.selectAll(".tick line").attr("stroke", "#b8b8b8")
     
+    // Add X axis label:
+    svg.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", width/2)
+        .attr("y", height+40)
+        .text("Time (year)")
+        .attr("font-size", "larger")
+  
+    // Add Y axis
+    var missionWiseData = keys.map(function(id) {
+        return {
+            id: id,
+            values: data.map(d => {return {date: d.date, degrees: +d[id]}})
+        };
+    });
 
-    var svg = d3.select("#main-graph"),
-        margin = {top: 15, right: 35, bottom: 15, left: 45},
-        width = +svg.attr("width") - margin.left - margin.right,
-        height = +svg.attr("height") - margin.top - margin.bottom;
 
-    var x = d3.scaleTime()
-        .rangeRound([margin.left, width - margin.right])
-        .domain(d3.extent(data, d => d.date))
 
     var y = d3.scaleLinear()
-        .rangeRound([height - margin.bottom, margin.top]);
+    .domain([ 0, 500+
+        d3.max(missionWiseData, d => d3.max(d.values, c => c.degrees))])
+    .range([ height, 0 ]);
+  svg.append("g")
+    .call(d3.axisLeft(y));
+  
+    // color palette
+    const color = d3.scaleOrdinal()
+    .domain(keys)
+    .range([
+        '#808080','#2f4f4f','#556b2f','#8b4513','#228b22','#7f0000','#191970','#808000',
+        '#32cd32','#7f007f','#8fbc8f','#b03060','#ff4500','#ffa500','#ffd700','#6a5acd',
+        '#00bfff','#f4a460','#adff2f','#ff6347','#b0c4de','#ff00ff','#1e90ff','#f0e68c',
+        '##3cb371','#008080','#b8860b','#4682b4','#d2691e','#9acd32','#cd5c5c','#00008b',
+        '#ffff00','#0000cd','#deb887','#00ff00','#9400d3','#00fa9a','#dc143c','#00ffff',
+        '#dda0dd','#ff1493','#afeeee','#ee82ee','#98fb98','#7fffd4','#ffc0cb'
+    ])  
+    //stack the data?
+    var stackedData = d3.stack()
+    //   .offset(d3.stackOffsetSilhouette)
+      .keys(keys)
+      (data)
+  
+    // create a tooltip
+    var Tooltip = svg
+      .append("text")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("class", "tooltip1")
+      .style("opacity", 0)
+      .style("font-size", 17)
 
-    var color = d3.scaleOrdinal(d3.schemePaired);
 
+      var Tooltip2 = d3.select("#main-graph")
+      .append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltip2")
+      .style("background-color", "#000")
+      .style("border", "solid")
+      .style("border-width", "2px")
+      .style("border-radius", "5px")
+      .style("color", "white")
+      .style("padding", "5px")
+      .style("position", "absolute")
+  
+    // Three function that change the tooltip when user hover / move / leave a cell
+    var mouseover = function(d) {
+      Tooltip.style("opacity", 1)
+      d3.selectAll(".myArea").style("opacity", .2);
 
-    var line = d3.line()
-        .defined(function(d) { return d; })
-        .curve(d3.curveLinear)
-        .x(d => x(d.date))
-        .y(d => y(d.degrees));
-
-    svg.append("g")
-        .attr("class","x-axis")
-        .attr("transform", "translate(0," + (height - margin.bottom) + ")")
-        .call(d3.axisBottom(x).ticks(d3.timeYear.every(5)))
-
-    svg.append("g")
-        .attr("class","y-axiss")
-        .attr("transform", "translate(" + (margin.left) + ",0)")
-        .call(d3.axisLeft(y).ticks(0))
+      Tooltip2
+      .style("opacity", 1);
     
-    svg.append("text")
-        .attr("x", -150)
-        .attr("y", 5)
-        .attr("transform", "rotate(-90)")
-        .attr("dy", ".4em")
-        .style("text-anchor", "end")
-        .style("font-size", "1.45em")
-        .text("Budget in millions ($)");
+      d3.select(this)
+      .style("stroke", "black")
+      .style("opacity", 1)
+      
 
-    svg.append("g")
-        .attr("class", "y-axis")
-        .attr("transform", "translate(" + margin.left + ",0)");
-
-    var focus = svg.append("g")
-             .attr("class", "focus")
-             .style("display", "none");
-
-    focus.append("line").attr("class", "lineHover")
-        .style("stroke", "#999")
-        .attr("stroke-width", 1)
-        .style("shape-rendering", "crispEdges")
-        .style("opacity", 0.5)
-        .attr("y1", -height)
-        .attr("y2",0);
-
-    focus.append("text").attr("class", "lineHoverDate")
-        .attr("text-anchor", "middle")
-        .attr("font-size", 15);                
-
-    var overlay = svg.append("rect")
-        .attr("class", "overlay")
-        .attr("x", margin.left)
-        .attr("width", width - margin.right - margin.left)
-        .attr("height", height)
-
-        
-
-        var copy = keys.filter(f => f.includes("_1"))
-        var copy = keys;
-
-        var missionWiseData = keys.map(function(id) {
-            return {
-                id: id,
-                values: data.map(d => {return {date: d.date, degrees: +d[id]}})
-            };
-        });
-        //  console.log(data)
-        // console.log(missionWiseData)
-
-        y.domain([
-            d3.min(missionWiseData, d => d3.min(d.values, c => c.degrees)),
-            d3.max(missionWiseData, d => d3.max(d.values, c => c.degrees))
-        ]);
-
-        svg.selectAll(".y-axis").call(d3.axisLeft(y).tickSize(-width + margin.right + margin.left))
-
-        var mission = svg.selectAll(".missionWiseData")
-            .data(missionWiseData);
-        mission.exit().remove();
-
-        mission.enter().insert("g", ".focus").append("path")
-            .attr("class", function (d,i) {
-               return "line missionWiseData-"+i+"";
-            })
-            .style("stroke", d => color(d.id))
-            .merge(mission)
-            .attr("d", d => line(d.values))
-        
-            tooltip(copy);
-        var legend = svg.selectAll('.legend')
-            .data(keys)
-            .enter()
-            .append('g')
-            .attr('class', 'legend')
-
-        // draw rectangle
-        legend.append('rect')
-            .attr('x', width - 20)
-            .attr('y', function(d, i) {
-                return i * 20;
-            })
-            .attr('width', 10)
-            .attr('height', 10)
-            .style('fill', function(d) {
-                return color(d);
-            });
-
-        // write mission name
-        legend.append('text')
-            .attr('x', width - 8)
-            .attr('y', function(d, i) {
-                return (i * 20) + 9;
-            })
-            .text(function(d) {
-                return d;
-            });
+    }
+    var mousemove = function(event, d) {
+      // console.log(data)
+      Tooltip2
+      .html(d["key"] + "<br>Budget: "   )
+      .style("left", ((event.x + 50)  + "px"))
+      .style("top", (event.y) + "px");
 
 
-            function tooltip(copy) {
+    }
+    var mouseleave = function(d) {
+      Tooltip.style("opacity", 0)
+      d3.select(this)
+      .style("stroke", "none")
+      .style("opacity", 0.8)
+      d3.selectAll(".myArea").style("opacity", 1).style("stroke", "none");
 
-                    var labels = focus.selectAll(".lineHoverText")
-                        .data(copy)
-        
-                    labels.enter().append("text")
-                        .attr("class", "lineHoverText")
-                        .style("fill", d => color(d))
-                        .attr("text-anchor", "start")
-                        .attr("font-size",12)
-                        .attr("dy", (_, i) => 1 + i * 1 + "em")
-                        .merge(labels);
-        
-                    var circles = focus.selectAll(".hoverCircle")
-                        .data(copy)
-        
-                        // draw circles on hovered column
-                    circles.enter().append("circle")
-                        .attr("class", "hoverCircle")
-                        .style("fill", d => color(d))
-                        .attr("r", 5)
-                        .merge(circles);
-        
-                    svg.selectAll(".overlay")
-                        .on("mouseover", function() { focus.style("display", null); })
-                        .on("mouseout", function() { focus.style("display", "none"); })
-                        .on("mousemove", mousemove);
-        
-                    function mousemove() {
-                            
-                        console.log(d3.pointer(event)[0])
-                        var x0 = x.invert(d3.pointer(event)[0]),
-                            i = bisectDate(data, x0, 1),
-                            d0 = data[i - 1],
-                            d1 = data[i];
-                            var d = x0 - d0.date > d1.date - x0 ? d1 : d0;
-                        // Draw a vertical line on hover
-                        focus.select(".lineHover")
-                            .attr("transform", "translate(" + x(d.date) + "," + height + ")");
-                        
-                        focus.select(".lineHoverDate")
-                            .attr("transform",
-                                "translate(" + x(d.date) + "," + (height + margin.bottom) + ")")
-                            .text(formatDate(d.date));
-        
-                        focus.selectAll(".hoverCircle")
-                            .attr("cy", e => y(d[e]))
-                            .attr("cx", x(d.date));
+      Tooltip2
+      .style("opacity", 0)
 
-                        focus.selectAll(".lineHoverText")
-                            .attr("transform",
-                                "translate(" + (x(d.date)) + "," + height/10  + ")")
-                            .text(e => e + " : " + "$" + formatValue(d[e]) + "Million" )
-                			.style("display",function(e){
-                				return d[e] > 0 ? "block" : "none";    // show only the missions that are greater than 0
-                			});
-                            
-                            // shift text to left after crossing 3/4th the width
-                        x(d.date) > (width - width / 4)
-                            ? focus.selectAll("text.lineHoverText")
-                                .attr("text-anchor", "end")
-                                .attr("dx", 10)
-                            : focus.selectAll("text.lineHoverText")
-                                .attr("text-anchor", "start")
-                                .attr("dx", 10)
-                    }
-                }
+     }
+  
+    // Area generator
+    var area = d3.area()
+      .x(function(d) { return x(d.data.year); })
+      .y0(function(d) { return y(d[0]); })
+      .y1(function(d) { return y(d[1]); })
+      .curve(d3.curveBundle.beta(1));
+    // Show the areas
+    svg
+      .selectAll("mylayers")
+      .data(stackedData)
+      .enter()
+      .append("path")
+        .attr("class", "myArea")
+        .style("fill", function(d) { return color(d.key); })
+        .attr("d", area)
+        .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave)
+        .on('click',(event,data)=> {
+          console.log(data.id);
+       
+      })
 
-});
+  })
