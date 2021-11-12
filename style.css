@@ -1,0 +1,22 @@
+body {
+    margin: auto;
+    /* width: 885px;*/
+    font: 10px arial;
+    padding: 25px;
+    background-color: #EEE;
+    color: black;
+  }
+  
+#title{
+    text-align: center;
+    font-size: xxx-large;
+}
+
+.tooltip2{
+    font-size: 18px;
+}
+
+.axis{
+  font: 15px sans-serif; 
+  font-style: bold ;
+}

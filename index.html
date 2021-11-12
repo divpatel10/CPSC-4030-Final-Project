@@ -9,14 +9,43 @@
 <body>
 
   <div class = "maingraph">
-
-    <h1>Graph of All the missions following their costs</h1>
-    
+    <h1 id="title">The Secondary Frontier</h1>
     <div id="main-graph"></div>
-
   </div>
+ 
+ 
+  <div class="secondary-graph">
+
+    <div class="secondgraph">
+      <div id="dropdown-1">
+
+        <select id="names">
+          <option>Spacecraft Development</option>
+          <option>Launch Support</option>
+          <option>Civil Service Compensation</option>
+          <option>Total Development</option>
+          <option>Tracking & Data Support</option>
+          <option>Operations</option>
+          <option>Total Cost</option>
+          <option>Total Cost (inflation adj)</option>
+        </select>
+      </div>
+      <svg id="barchart"></svg>
+
+    </div>
   
+
+    <div class="thirdgraph">
+      <h1>Cassini</h1>
+      
+      <svg id="graph3" height="804" width="950"></svg>
+
+    </div>
+  </div>
+
   
   
   <script src="script.js"></script>
+  <script src="script-g2.js"></script>
+  <script src="script-g3.js"></script>
   </body>
