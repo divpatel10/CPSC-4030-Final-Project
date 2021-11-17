@@ -1,5 +1,5 @@
 var margin = {top: 60, right: 230, bottom: 50, left: 100},
-    width = screen.width - margin.left - margin.right - 500,
+    width = screen.width - margin.left - margin.right - 800,
     height = (screen.height) - margin.top - margin.bottom;
 console.log(screen.height)
 // append the svg object to the body of the page
