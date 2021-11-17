@@ -20,3 +20,47 @@ body {
   font: 15px sans-serif; 
   font-style: bold ;
 }
+
+.maingraph {
+  background-color: #b3a9a9;
+  border-radius: 10px;
+  float: left;
+}
+.maingraph h1 {
+  text-align: center;
+  margin-left: -300px;
+}
+
+.secondary-graph{
+  align-items: center;
+  text-align: center;
+}
+
+.secondgraph {
+  float: left;
+  height: 600px;
+  transition: box-shadow 0.3s;
+  margin: 5px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+}
+
+.secondgraph:hover {
+  box-shadow: 2px 6px 12px 11px rgb(205 205 205);
+}
+
+
+.thirdgraph {
+  transition: box-shadow 0.3s;
+  margin: 5px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+  float:left;
+  height: 600px;
+}
+.thirdgraph:hover {
+  box-shadow: -13px 9px 11px 3px rgb(205 205 205);
+  
+}

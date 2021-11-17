@@ -23,8 +23,8 @@ function buildGraph(dataset, title) {
     values.push(cleanNumber(dataset[i][title]));
   }
   var dimensions = {
-    width: 800,
-    height: 800,
+    width: 600,
+    height: 600,
     margin: {
       top: 50,
       bottom: 50,

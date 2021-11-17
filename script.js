@@ -1,10 +1,11 @@
-const margin = {top: 60, right: 230, bottom: 60, left: 100},
+var margin = {top: 60, right: 230, bottom: 50, left: 100},
     width = screen.width - margin.left - margin.right - 500,
-    height = (screen.height/(3/2)) - margin.top - margin.bottom;
+    height = (screen.height/(1.1)) - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-const svg = d3.select("#main-graph")
-  .append("svg")
+var svg = d3.select("#main-graph")
+        .append("svg")
+  
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -154,6 +155,7 @@ d3.csv("main-data-inflation.csv").then( function(data) {
       .y1(function(d) { return y(d[1]); })
       .curve(d3.curveBundle.beta(1));
     // Show the areas
+    
     svg
       .selectAll("mylayers")
       .data(stackedData)
@@ -166,8 +168,10 @@ d3.csv("main-data-inflation.csv").then( function(data) {
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
         .on('click',(event,data)=> {
-          console.log(data.id);
-       
+          console.log(data["key"]);
+          document.getElementById("pieChart").innerHTML = "";
+          pieChart(data["key"]);
+          // call new function here 
       })
 
   })
