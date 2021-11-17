@@ -3,7 +3,7 @@ body {
     /* width: 885px;*/
     font: 10px arial;
     padding: 25px;
-    background-color: #EEE;
+    background-color: #000;
     color: black;
   }
   
@@ -22,7 +22,7 @@ body {
 }
 
 .maingraph {
-  background-color: #b3a9a9;
+  background-color: #ccc;
   border-radius: 10px;
   float: left;
 }
@@ -30,6 +30,11 @@ body {
   text-align: center;
   margin-left: -300px;
 }
+
+.maingraph:hover {
+  box-shadow: 2px 2px 4px 4px rgb(205 205 205);
+}
+
 
 .secondary-graph{
   align-items: center;
@@ -40,27 +45,27 @@ body {
   float: left;
   height: 600px;
   transition: box-shadow 0.3s;
-  margin: 5px 5px;
+  margin: 5px 15px;
   border-radius: 10px;
   border: 1px solid #ccc;
-  background: #fff;
+  background-color: #fff;
 }
 
 .secondgraph:hover {
-  box-shadow: 2px 6px 12px 11px rgb(205 205 205);
+  box-shadow: 2px 2px 4px 4px rgb(205 205 205);
 }
 
 
 .thirdgraph {
   transition: box-shadow 0.3s;
-  margin: 5px 5px;
+  margin: 5px 15px;
   border-radius: 10px;
   border: 1px solid #ccc;
-  background: #fff;
+  background-color: #fff;
   float:left;
   height: 600px;
 }
 .thirdgraph:hover {
-  box-shadow: -13px 9px 11px 3px rgb(205 205 205);
+  box-shadow: 2px 2px 4px 4px rgb(205 205 205);
   
 }

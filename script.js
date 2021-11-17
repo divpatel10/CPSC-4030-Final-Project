@@ -1,7 +1,6 @@
 var margin = {top: 60, right: 230, bottom: 50, left: 100},
     width = screen.width - margin.left - margin.right - 800,
-    height = (screen.height) - margin.top - margin.bottom;
-console.log(screen.height)
+    height = 1100 - margin.top - margin.bottom ;
 // append the svg object to the body of the page
 var svg = d3.select("#main-graph")
         .append("svg")
@@ -30,7 +29,7 @@ d3.csv("main-data-inflation.csv").then( function(data) {
     .range([ 0, width ]);
   
     svg.append("g").attr("class", "axis")
-    .attr("transform", "translate(0," + 2*height + ")")
+    .attr("transform", "translate(0," + 1.5*height + ")")
     .attr("font-size", "20px")
     .call(d3.axisBottom(x).ticks(5));
     // Customization
@@ -39,7 +38,7 @@ d3.csv("main-data-inflation.csv").then( function(data) {
     svg.append("text")
         .attr("text-anchor", "end")
         .attr("x", width/2)
-        .attr("y", 2*height+50)
+        .attr("y", (1.5*height)+50)
         .style("font-size", "2.45em")
         .text("Year");
         
@@ -60,7 +59,7 @@ d3.csv("main-data-inflation.csv").then( function(data) {
     var y = d3.scaleLinear()
     .domain([ 0, 500+
         d3.max(missionWiseData, d => d3.max(d.values, c => c.degrees))])
-    .range([ 2*height, 0 ]);
+    .range([ 1.5*height, 0 ]);
 
     svg.append("g").attr("class", "axis")
     .call(d3.axisLeft(y));
