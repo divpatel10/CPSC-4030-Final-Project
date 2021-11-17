@@ -40,7 +40,7 @@ body {
   float: left;
   height: 600px;
   transition: box-shadow 0.3s;
-  margin: 5px;
+  margin: 5px 5px;
   border-radius: 10px;
   border: 1px solid #ccc;
   background: #fff;
@@ -53,7 +53,7 @@ body {
 
 .thirdgraph {
   transition: box-shadow 0.3s;
-  margin: 5px;
+  margin: 5px 5px;
   border-radius: 10px;
   border: 1px solid #ccc;
   background: #fff;
