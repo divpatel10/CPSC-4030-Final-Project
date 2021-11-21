@@ -1,6 +1,7 @@
 var margin = {top: 60, right: 100, bottom: 50, left: 100},
     width = screen.width - margin.left - margin.right - 800,
     height = 1100 - margin.top - margin.bottom ;
+
 // append the svg object to the body of the page
 var svg = d3.select("#main-graph")
         .append("svg")
@@ -32,9 +33,12 @@ d3.csv("main-data-inflation.csv").then( function(data) {
     .attr("transform", "translate(0," + 1.5*height + ")")
     .attr("font-size", "20px")
     .call(d3.axisBottom(x).ticks(5));
-    // Customization
+
+
     svg.selectAll(".tick line").attr("stroke", "#FFF")
-    // Add X axis label:
+
+    
+    //add X-axis label:
     svg.append("text")
         .attr("text-anchor", "end")
         .attr("x", width/2)
@@ -43,7 +47,7 @@ d3.csv("main-data-inflation.csv").then( function(data) {
         .text("Year");
         
   
-    // Add Y axis
+    //add Y-axis
     var missionWiseData = keys.map(function(id) {
         return {
             id: id,
@@ -170,6 +174,9 @@ d3.csv("main-data-inflation.csv").then( function(data) {
           console.log(data["key"]);
           document.getElementById("pieChart").innerHTML = "";
           pieChart(data["key"]);
+
+          document.getElementById("barchart").innerHTML = "";
+          barChart(data["key"]);
           // call new function here 
       })
 

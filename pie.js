@@ -41,7 +41,7 @@ function pieChart(fileName) {
     .pie()
     .sort(null)
     .value(function (d) {
-      console.log("AAAA", d.population)
+      // console.log("AAAA", d.population)
       return d.population;
     });
 
@@ -77,12 +77,11 @@ function pieChart(fileName) {
         .slice(1, data[d].length)
         .replaceAll(",", "");
     }
-    //remove last two elements from the array
-    //data.splice(-1);
-    //data.splice(-1);
-    //data.splice(-1);
+
+
     d = data;
 
+    console.log("Ayyyy",d);
     var arc = g
       .selectAll(".arc")
       .data(pie(d))
