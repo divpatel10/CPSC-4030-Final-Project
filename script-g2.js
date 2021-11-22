@@ -126,10 +126,10 @@ svg.selectAll("legends")
 
     svg.selectAll("rect")
       .transition()
-      .duration(50)
+      .duration(15)
       .attr("y", d => y(d[1]))
       .attr("height", d => y(d[0]) - y(d[1]))
-      .delay(function(d,i){ return(i*50)})
+      .delay(function(d,i){ return(i*45)})
 
 })
 

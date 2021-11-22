@@ -70,11 +70,15 @@ body {
   
 }
 
+.toggle-inflation{
+  float: right;
+  margin-right: 10vw;
+}
 .switch {
   position: relative;
   display: inline-block;
   width: 60px;
-  height: 34px;
+  height: 35px;
 }
 
 .switch input {display:none;}
@@ -86,7 +90,9 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: rgb(230, 68, 76);
+  border-radius: 34px;
+
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -99,6 +105,8 @@ body {
   left: 4px;
   bottom: 4px;
   background-color: white;
+  border-radius: 34px;
+
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -115,4 +123,11 @@ input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26x);
   transform: translateX(26px);
+}
+
+.switch-text{
+  margin-top: 40px;
+  display: inline-block;
+  white-space: nowrap;
+  margin-left: -30px;
 }

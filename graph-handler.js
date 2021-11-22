@@ -1,5 +1,6 @@
 var isInflationData = false;
 var fileName = "main-data.csv";
+
           document.addEventListener('DOMContentLoaded', function () {
             var checkbox = document.querySelector('input[type="checkbox"]');
           

@@ -62,9 +62,14 @@
       var total_cost_data = 1;
       d3.csv("cost-total.csv",function(dataset){total_cost_data = 5});
       console.log(total_cost_data)
-  
+      
+      var yScaleOffset = 500;
+      if(!isInflation){
+        yScaleOffset = 1200;
+      }
+
       var y = d3.scaleLinear()
-      .domain([ 0, 500+
+      .domain([ 0, yScaleOffset+
           d3.max(missionWiseData, d => d3.max(d.values, c => c.degrees))])
       .range([ height, 0 ]);
   
@@ -187,3 +192,4 @@
     });
 }
 
+runMainGraph(false, "main-data.csv")
