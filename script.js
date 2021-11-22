@@ -58,11 +58,7 @@
           };
       });
   
-  
-      var total_cost_data = 1;
-      d3.csv("cost-total.csv",function(dataset){total_cost_data = 5});
-      console.log(total_cost_data)
-      
+
       var yScaleOffset = 500;
       if(!isInflation){
         yScaleOffset = 1200;
@@ -138,10 +134,28 @@
         
   
       }
+
+      var total_budget;
+
+      if(isInflation){
+        total_budget = total_cost_data[0]
+      }
+      else{
+        
+        total_budget = total_cost_data[1]
+      }
+
+      var type_of_cost = "(with inflation)";
+
+      if(!isInflation){
+        type_of_cost = "(without inflation)"
+      }
+
+      console.log("total cost budget",total_budget)
       var mousemove = function(event, d) {
       //   console.log(d)
         Tooltip2
-        .html(d["key"] + "<br>Budget: "   )
+        .html(d["key"] + "<br><br> Total Budget: $" + total_budget[d["key"]] + " millions" + "<br><br> "+ type_of_cost  )
         .style("left", ((event.x + 50)  + "px"))
         .style("top", (event.y) + "px");
   

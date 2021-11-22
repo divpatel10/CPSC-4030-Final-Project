@@ -87,21 +87,68 @@ function pieChart(fileName) {
 
     d = data;
 
+    // tooltip for showing info about highlighted mission
+    var Tooltip2 = d3.select("#pieChart")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip2")
+    .style("background-color", "#000")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "5px")
+    .style("color", "white")
+    .style("padding", "5px")
+    .style("position", "absolute")
+
+       // Area generator
+       var area = d3.area()
+       .x(function(d) { return x(d.data["Fiscal Year"]); })
+       .y0(function(d) { return y(d[0]); })
+       .y1(function(d) { return y(d[1]); })
+       .curve(d3.curveBundle.beta(1));
+
+     // Three function that change the tooltip when user hover / move / leave a cell
+     var mouseover = function(d) {
+
+      Tooltip2
+      .style("opacity", 1);
+    
+      d3.select(this)
+      .style("stroke", "black")
+      .style("opacity", 1)
+      
+
+    }
+    var mousemove = function(event, d) {
+    //   console.log(d)
+      Tooltip2
+      .html(d["key"] + "<br>Budget: "   )
+      .style("left", ((event.x + 50)  + "px"))
+      .style("top", (event.y) + "px");
+
+
+    }
+    var mouseleave = function(d) {
+
+      Tooltip2
+      .style("opacity", 0)
+
+     }
+
     var arc = g
       .selectAll(".arc")
       .data(pie(d))
       .enter()
       .append("g")
-      .attr("class", "arc");
+      .attr("class", "arc")
 
     arc
       .append("path")
       .attr("d", path)
       .attr("fill", function (d) {
         return color(d.data.age);
-      });
-
-
+      })
+    
 
   
   });
