@@ -1,5 +1,4 @@
 function pieChart(fileName) {
-
   var width = 600;
   height = 600;
   margin = 40;
@@ -32,7 +31,14 @@ function pieChart(fileName) {
 
 // Scale of the color
   var color = d3.scaleOrdinal([
-    '#32cd32','#7f007f','#8fbc8f','#b03060','#ff4500','#ffa500','#ffd700','#6a5acd'
+    '#32cd32',
+    '#7f007f',
+    '#8fbc8f',
+    '#b03060',
+    '#ff4500',
+    '#ffa500',
+    '#ffd700',
+    '#6a5acd'
 
   ]);
 
@@ -81,7 +87,6 @@ function pieChart(fileName) {
 
     d = data;
 
-    console.log("Ayyyy",d);
     var arc = g
       .selectAll(".arc")
       .data(pie(d))
