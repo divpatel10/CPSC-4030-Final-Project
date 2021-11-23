@@ -18,16 +18,17 @@ function pieChart(fileName) {
     .append("g")
     .attr("transform", "translate(" + width / 4 + "," + height / 4 + ")");
 
+
 //Title of the chart
   var chartTitle = d3
     .select("#pieChart")
     .append("text")
-    .style("font", "24px sans-serif")
+    .style("font", "20px sans-serif")
     .style("fill", "black")
     .attr("text-anchor", "middle")
     .attr("dx", width / 2)
-    .attr("dy", margin - 20)
-    .text("Sector wise cost of " + fileName);
+    .attr("dy", margin - 5)
+    .text("What is the cost distribution of " + fileName);
 
 
     var hoverTitle = d3
@@ -92,8 +93,8 @@ function pieChart(fileName) {
 
 
     var mousemove = function(event, d) {
-      hoverTitle.text("Sector wise cost of " + d.data["age"]);
-
+      
+      hoverTitle.text("Cost of " + d.data["age"] + ": $" + d.data["population"]+ "millions");
 
     }
 

@@ -1,7 +1,7 @@
 function barChart (fileName){
 
   
-var margin = {top: 30, right: 30, bottom: 50, left: 50},
+var margin = {top: 30, right: 30, bottom: 50, left: 60},
 width = 600 - margin.left - margin.right,
 height = 600 - margin.top - margin.bottom;
 
@@ -59,6 +59,13 @@ var x = d3.scaleBand()
   .domain(groups)
   .range([0, width])
   .padding([0.2])
+  svg.append("text")
+  .attr("text-anchor", "end")
+  .attr("x", width/2)
+  .attr("y", (height)+40)
+  .style("font-size", "1.45em")
+  .text("Year");
+
 svg.append("g")
 .attr("transform", `translate(0, ${height})`)
 .call(d3.axisBottom(x).tickSizeOuter(0))
@@ -72,6 +79,14 @@ var y = d3.scaleLinear()
 .range([ height, 0 ]);
 svg.append("g")
 .call(d3.axisLeft(y));
+svg.append("text")
+          .attr("x", -200)
+          .attr("y", -40)
+          .attr("transform", "rotate(-90)")
+          .attr("dy", ".4em")
+          .style("text-anchor", "end")
+          .style("font-size", "1.45em")
+          .text("Budget in millions ($)");
 
 var color = d3.scaleOrdinal()
 .domain(subgroups)
