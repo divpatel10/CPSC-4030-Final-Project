@@ -1,9 +1,8 @@
 var isInflationData = false;
 var fileName = "main-data.csv";
-
+var isManned = false;
           document.addEventListener('DOMContentLoaded', function () {
-            var checkbox = document.querySelector('input[type="checkbox"]');
-          
+            var checkbox = document.querySelector('input[class="inflation-slider"]');
             checkbox.addEventListener('change', function () {
       
               if (checkbox.checked) {
@@ -18,7 +17,28 @@ var fileName = "main-data.csv";
                 console.log('Not checked');
               }
               document.getElementById("main-graph").innerHTML = "";
-              runMainGraph(isInflationData, fileName);
+              runMainGraph(isInflationData, fileName, isManned);
+            });
+
+
+          });
+
+
+          document.addEventListener('DOMContentLoaded', function () {
+            var checkbox = document.querySelector('input[class="apollo-slider"]');
+            checkbox.addEventListener('change', function () {
+      
+              if (checkbox.checked) {
+      
+                isManned = true
+                console.log('Checked');
+              } else {
+      
+                isManned = false
+                console.log('Not checked');
+              }
+              document.getElementById("main-graph").innerHTML = "";
+              runMainGraph(isInflationData, fileName, isManned);
             });
 
 

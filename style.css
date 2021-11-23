@@ -71,9 +71,20 @@ body {
 }
 
 .toggle-inflation{
+  position: relative;
   float: right;
   margin-right: 10vw;
 }
+
+.toggle-apollo{
+  float: right;
+  position: relative;
+  margin-right: -2.4vw;
+  margin-top: 6vh;
+}
+
+
+
 .switch {
   position: relative;
   display: inline-block;
@@ -126,7 +137,7 @@ input:checked + .slider:before {
 }
 
 .switch-text{
-  margin-top: 40px;
+  margin-top: 38px;
   display: inline-block;
   white-space: nowrap;
   margin-left: -30px;

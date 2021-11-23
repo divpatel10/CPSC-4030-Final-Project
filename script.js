@@ -1,8 +1,8 @@
 
-    function runMainGraph( isInflation,  fileName){
+    function runMainGraph( isInflation,  fileName, isManned){
       var margin = {top: 60, right: 100, bottom: 50, left: 100},
       width = screen.width - margin.left - margin.right - 800,
-      height = 1055 - margin.top - margin.bottom ;
+      height = 1080 - margin.top - margin.bottom ;
   
   // append the svg object to the body of the page
   var svg = d3.select("#main-graph")
@@ -22,10 +22,13 @@
   
   
       // Filter function to remove the apollo mission data from the dataset 
-      data.filter(function(d) {
+      if(!isManned){
+
+        data.filter(function(d) {
           delete d.Apollo;
           return d;
-      })
+        })
+      }
   
       // Add X axis
       var x = d3.scaleLinear()
