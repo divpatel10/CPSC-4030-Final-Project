@@ -1,7 +1,7 @@
 function pieChart(fileName) {
   var width = 600;
   height = 600;
-  margin = 40;
+  margin = 50;
 
   // The radius of the pieplot is half the width or half the height (smallest one).
   var radius = Math.min(width, height) / 2 - margin;
@@ -29,6 +29,18 @@ function pieChart(fileName) {
     .attr("dy", margin - 20)
     .text("Sector wise cost of " + fileName);
 
+
+    var hoverTitle = d3
+    .select("#pieChart")
+    .append("text")
+    .style("font", "20px sans-serif")
+    .style("fill", "black")
+    .attr("text-anchor", "middle")
+    .style("background-color", "#000")
+
+    .attr("dx", width / 2)
+    .attr("dy", height - 20)
+   
 // Scale of the color
   var color = d3.scaleOrdinal([
     '#32cd32',
@@ -91,24 +103,29 @@ function pieChart(fileName) {
     var Tooltip2 = d3.select("#pieChart")
     .append("div")
     .style("opacity", 0)
-    .attr("class", "tooltip2")
+    .attr("class", "tooltip4")
     .style("background-color", "#000")
     .style("border", "solid")
     .style("border-width", "2px")
     .style("border-radius", "5px")
     .style("color", "white")
     .style("padding", "5px")
+    .style("width", "400px")
     .style("position", "absolute")
 
-       // Area generator
-       var area = d3.area()
-       .x(function(d) { return x(d.data["Fiscal Year"]); })
-       .y0(function(d) { return y(d[0]); })
-       .y1(function(d) { return y(d[1]); })
-       .curve(d3.curveBundle.beta(1));
 
-     // Three function that change the tooltip when user hover / move / leave a cell
-     var mouseover = function(d) {
+
+    var mousemove = function(event, d) {
+      hoverTitle.text("Sector wise cost of " + d.data["age"]);
+
+      Tooltip2
+      .html("" + d.data["age"] + ": "  )
+      .style("left", ((event.x + 50)  + "px"))
+      .style("top", (event.y) + "px");
+
+    }
+
+    var mouseover = function(d) {
 
       Tooltip2
       .style("opacity", 1);
@@ -119,21 +136,14 @@ function pieChart(fileName) {
       
 
     }
-    var mousemove = function(event, d) {
-    //   console.log(d)
-      Tooltip2
-      .html(d["key"] + "<br>Budget: "   )
-      .style("left", ((event.x + 50)  + "px"))
-      .style("top", (event.y) + "px");
-
-
-    }
     var mouseleave = function(d) {
+      // Three function that change the tooltip when user hover / move / leave a cell
 
       Tooltip2
       .style("opacity", 0)
 
      }
+  
 
     var arc = g
       .selectAll(".arc")
@@ -148,7 +158,10 @@ function pieChart(fileName) {
       .attr("fill", function (d) {
         return color(d.data.age);
       })
-    
+      // .attr("d", label)
+      .on("mouseover", mouseover)
+      .on("mousemove", mousemove)
+      .on("mouseleave", mouseleave)    
 
   
   });

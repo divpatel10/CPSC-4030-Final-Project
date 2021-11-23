@@ -88,10 +88,10 @@
       .domain(keys)
       .range([
           '#707070','#2f4f4f','#556b2f','#8b4513','#228b22','#7f0000','#191970','#808000',
-          '#32cd32','#7f007f','#8fbc8f','#b03060','#ff4500','#ffa500','#ffd700','#6a5acd',
           '#00bfff','#f4a460','#adff2f','#ff6347','#b0c4de','#ff00ff','#1e90ff','#f0e68c',
           '##3cb371','#008080','#b8860b','#4682b4','#d2691e','#9acd32','#cd5c5c','#00008b',
           '#ffff00','#0000cd','#deb887','#00ff00','#9400d3','#00fa9a','#dc143c','#00ffff',
+          '#32cd32','#7f007f','#8fbc8f','#b03060','#ff4500','#ffa500','#ffd700','#6a5acd',
           '#dda0dd','#ff1493','#afeeee','#ee82ee','#98fb98','#7fffd4','#ffc0cb'
       ])  
   
@@ -121,16 +121,17 @@
         .style("border-radius", "5px")
         .style("color", "white")
         .style("padding", "5px")
-        .style("position", "absolute")
     
       // Three function that change the tooltip when user hover / move / leave a cell
       var mouseover = function(d) {
         Tooltip.style("opacity", 1)
+
         d3.selectAll(".myArea").style("opacity", .15);
   
         Tooltip2
-        .style("opacity", 1);
-      
+        .style("opacity", 1)
+        .style("position", "absolute");
+
         d3.select(this)
         .style("stroke", "black")
         .style("opacity", 1)
@@ -173,6 +174,7 @@
   
         Tooltip2
         .style("opacity", 0)
+
   
        }
     
