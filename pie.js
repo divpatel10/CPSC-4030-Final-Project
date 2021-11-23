@@ -42,17 +42,7 @@ function pieChart(fileName) {
     .attr("dy", height - 20)
    
 // Scale of the color
-  var color = d3.scaleOrdinal([
-    '#32cd32',
-    '#7f007f',
-    '#8fbc8f',
-    '#b03060',
-    '#ff4500',
-    '#ffa500',
-    '#ffd700',
-    '#6a5acd'
-
-  ]);
+  var color = d3.scaleOrdinal(d3.schemeSet2);
 
 // Create the pie chart based on the data
   var pie = d3
@@ -99,50 +89,15 @@ function pieChart(fileName) {
 
     d = data;
 
-    // tooltip for showing info about highlighted mission
-    var Tooltip2 = d3.select("#pieChart")
-    .append("div")
-    .style("opacity", 0)
-    .attr("class", "tooltip4")
-    .style("background-color", "#000")
-    .style("border", "solid")
-    .style("border-width", "2px")
-    .style("border-radius", "5px")
-    .style("color", "white")
-    .style("padding", "5px")
-    .style("width", "400px")
-    .style("position", "absolute")
-
 
 
     var mousemove = function(event, d) {
       hoverTitle.text("Sector wise cost of " + d.data["age"]);
 
-      Tooltip2
-      .html("" + d.data["age"] + ": "  )
-      .style("left", ((event.x + 50)  + "px"))
-      .style("top", (event.y) + "px");
 
     }
 
-    var mouseover = function(d) {
 
-      Tooltip2
-      .style("opacity", 1);
-    
-      d3.select(this)
-      .style("stroke", "black")
-      .style("opacity", 1)
-      
-
-    }
-    var mouseleave = function(d) {
-      // Three function that change the tooltip when user hover / move / leave a cell
-
-      Tooltip2
-      .style("opacity", 0)
-
-     }
   
 
     var arc = g
@@ -159,9 +114,7 @@ function pieChart(fileName) {
         return color(d.data.age);
       })
       // .attr("d", label)
-      .on("mouseover", mouseover)
       .on("mousemove", mousemove)
-      .on("mouseleave", mouseleave)    
 
   
   });
