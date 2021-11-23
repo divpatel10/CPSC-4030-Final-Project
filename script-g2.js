@@ -1,14 +1,14 @@
 function barChart (fileName){
 
   
-var margin = {top: 30, right: 30, bottom: 50, left: 60},
+var margin = {top: 50, right: 30, bottom: 50, left: 60},
 width = 600 - margin.left - margin.right,
 height = 600 - margin.top - margin.bottom;
 
 var svg = d3.select("#barchart")
 .append("svg")
 .attr("width", width + margin.left + margin.right)
-.attr("height", height + margin.top + margin.bottom)
+.attr("height", height + margin.top + margin.bottom )
 .append("g")
 .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -88,9 +88,18 @@ svg.append("text")
           .style("font-size", "1.45em")
           .text("Budget in millions ($)");
 
-var color = d3.scaleOrdinal()
-.domain(subgroups)
-.range([ '#00bfff','#f4a460','#adff2f','#ff6347','#b0c4de','#ff00ff','#1e90ff','#f0e68c'  ]);
+          var color = d3.scaleOrdinal(d3.schemeSet2);
+
+  //Title of the chart
+  var chartTitle = svg
+  .append("text")
+  .style("font", "20px sans-serif")
+  .style("fill", "black")
+  .attr("text-anchor", "middle")
+  .attr("dx", width / 2)
+  .attr("dy", -10)
+  .text("How has the cost breakdown of " + fileName + " changed over time?")
+  
 
 //stack the data
 var stackedData = d3.stack()

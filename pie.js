@@ -43,8 +43,8 @@ function pieChart(fileName) {
     .attr("dy", height - 20)
    
 // Scale of the color
-  var color = d3.scaleOrdinal(d3.schemeSet2);
-
+  var color = d3.scaleOrdinal()
+  .range([ '#00bfff','#f4a460','#adff2f','#ff6347','#b0c4de','#ff00ff','#1e90ff','#f0e68c'  ]);
 // Create the pie chart based on the data
   var pie = d3
     .pie()
