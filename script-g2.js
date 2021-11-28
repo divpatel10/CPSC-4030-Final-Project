@@ -1,9 +1,14 @@
 function barChart (fileName){
 
   
-var margin = {top: 50, right: 30, bottom: 50, left: 60},
-width = 600 - margin.left - margin.right,
-height = 600 - margin.top - margin.bottom;
+var margin = {top: 40, right: 30, bottom: 50, left: 60},
+// width = 500 - margin.left - margin.right,
+// height = 440 - margin.top - margin.bottom;
+
+width = document.querySelector('.secondgraph').offsetWidth - margin.left - margin.right ,
+height = document.querySelector('.secondgraph').offsetHeight - margin.top - margin.bottom 
+
+
 
 var svg = d3.select("#barchart")
 .append("svg")
@@ -93,7 +98,7 @@ svg.append("text")
   //Title of the chart
   var chartTitle = svg
   .append("text")
-  .style("font", "20px sans-serif")
+  .style("font", "16px sans-serif")
   .style("fill", "black")
   .attr("text-anchor", "middle")
   .attr("dx", width / 2)

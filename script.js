@@ -1,23 +1,36 @@
 
     function runMainGraph( isInflation,  fileName, isManned){
-      var margin = {top: 60, right: 100, bottom: 50, left: 100},
-      width = screen.width - margin.left - margin.right - 800,
-      height = 1080 - margin.top - margin.bottom ;
-  
+      var margin = {top: 60, right: 60, bottom: 50, left: 60},
+      // width = screen.width - margin.left - margin.right - 800,
+      width = document.querySelector('.maingraph').offsetWidth - 200,
+      // height = screen.height - margin.top - margin.bottom - 200 ;
+      height = document.querySelector('.maingraph').offsetHeight - margin.top - margin.bottom - 200;
+      console.log("height", height)
   // append the svg object to the body of the page
   var svg = d3.select("#main-graph")
           .append("svg")
     
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+      .attr("width", width + 200)
+      .attr("height", height + 200)
     .append("g")
       .attr("transform",
-            `translate(${margin.left}, ${margin.top})`);
+            `translate(${margin.left}, ${margin.top})`)
+      svg.append("text")
+      .style("font", "20px sans-serif")
+      .style("fill", "black")
+      .attr("text-anchor", "middle")
+      .attr("dx", width / 2)
+      .attr("dy", -30)
+      .text("");
   
   // Parse the Data
   d3.csv(fileName).then( function(data) {
   d3.csv("cost-total.csv").then( function(total_cost_data) {
-  
+
+    
+
+
+
     var keys = data.columns.slice(1)
   
   
@@ -29,21 +42,27 @@
           return d;
         })
       }
+      
+        var lineRange = []
+  
+        for(let i = 1965; i <= 2022; i+=5){
+          lineRange.push(i)
+        }
+  
   
       // Add X axis
       var x = d3.scaleLinear()
       .domain(d3.extent(data, function(d) { return d.year; }))
       .range([ 0, width ]);
-    
+
       svg.append("g").attr("class", "axis")
       .attr("transform", "translate(0," + height + ")")
       .attr("font-size", "20px")
-      .call(d3.axisBottom(x).ticks(5));
-  
-  
-      svg.selectAll(".tick line").attr("stroke", "#FFF")
-  
+      .call(d3.axisBottom(x).tickSize(-height).tickValues(lineRange))
+      .select(".domain").remove()
       
+      svg.selectAll(".tick line").attr("stroke", "#b8b8b8")
+
       //add X-axis label:
       svg.append("text")
           .attr("text-anchor", "end")
@@ -62,45 +81,72 @@
       });
   
 
-      var yScaleOffset = 500;
+      var yScaleOffset = -500;
       if(!isInflation){
-        yScaleOffset = 1200;
+        yScaleOffset = 300;
       }
 
+      if(isManned){
+        if(isInflation){
+          yScaleOffset = yScaleOffset - 14000;
+
+        }
+        else{
+
+          yScaleOffset = yScaleOffset - 1400;
+        }
+      }
+      
+      var domain_val = yScaleOffset+d3.max(missionWiseData, d => d3.max(d.values, c => c.degrees))
+      console.log("domain_val", domain_val)
       var y = d3.scaleLinear()
-      .domain([ 0, yScaleOffset+
-          d3.max(missionWiseData, d => d3.max(d.values, c => c.degrees))])
+      .domain([ -domain_val, domain_val])
       .range([ height, 0 ]);
   
-      svg.append("g").attr("class", "axis")
-      .call(d3.axisLeft(y));
-      svg.append("text")
-          .attr("x", -150)
-          .attr("y", -90)
-          .attr("transform", "rotate(-90)")
-          .attr("dy", ".4em")
-          .style("text-anchor", "end")
-          .style("font-size", "2.45em")
-          .text("Budget in millions ($)");
+      // svg.append("g").attr("class", "axis")
+      // .call(d3.axisLeft(y));
+      // svg.append("text")
+      //     .attr("x", -150)
+      //     .attr("y", -90)
+      //     .attr("transform", "rotate(-90)")
+      //     .attr("dy", ".4em")
+      //     .style("text-anchor", "end")
+      //     .style("font-size", "2.45em")
+      //     .text("Budget in millions ($)");
     
-      // color palette
-      const color = d3.scaleOrdinal()
-      .domain(keys)
-      .range([
-        '#00bfff','#f4a460','#adff2f','#ff6347','#b0c4de','#ff00ff','#1e90ff','#f0e68c',
-        '#ffff00','#0000cd','#deb887','#00ff00','#9400d3','#00fa9a','#dc143c','#00ffff',
-        '##3cb371','#008080','#b8860b','#4682b4','#d2691e','#9acd32','#cd5c5c','#00008b',
-        '#32cd32','#7f007f','#8fbc8f','#b03060','#ff4500','#ffa500','#ffd700','#6a5acd',
-        '#dda0dd','#ff1493','#afeeee','#ee82ee','#98fb98','#7fffd4','#ffc0cb',
-        '#707070','#2f4f4f','#556b2f','#8b4513','#228b22','#7f0000','#191970','#808000'
-      ])  
+      // // color palette
+      // const color = d3.scaleOrdinal()
+      // .domain(keys)
+      // .range([
+      //   '#e0ffff','#b9d9eb','#7df9ff','#7FFFD4','#6CB4EE','#007FFF','#89CFF0','#0000FF',
+      //   '#318CE7','#5072A7','#6699CC','#0039a6','#13274F','#0a2351','#3457D5','#5F9EA0',
+      //   '#00BFFF','#0CAFFF','#1034A6','#7DF9FF','#15f4ee','#3F00FF','#6050DC','#1ca9c9',
+      //   '#4B9CD3','#B9D9EB','#012169','#6F00FF','#2c3968','#00416A','#0077c0','#002244',
+      //   '#2a52be','#00FFFF','#1E90FF','#003399','#073980','#E0FFFF','#00538C',
+      //   '#034694','#00BFFF','#008E97','#1877F2','#99FFFF','#87CEFA','#0000CD','#000080'
+      // ])  
+      // const color = d3.scaleOrdinal()
+      // .domain(missions_sorted)
+      // .range(
+      //   //BLUE ["#000c1e","#1f75fe","#000f28","#297bfe","#001332","#3381fe","#00173c","#3e87fe","#001b47","#488efe","#001f51","#5294fe","#00235b","#5c9afe","#002765","#66a0fe","#012b6f","#70a7fe","#012f79","#7aadfe","#013383","#85b3fe","#01378e","#8fbafe","#013b98","#99c0ff","#013fa2","#a3c6ff","#0142ac","#adccff","#0146b6","#b7d3ff","#014ac0","#c2d9ff","#014ecb","#ccdfff","#0152d5","#d6e6ff","#0156df","#e0ecff","#015ae9","#eaf2ff","#015ef3","#f4f8ff","#0162fd","#feffff","#0b68fe","#00040a","#156efe","#000814","#1f75fe","#000c1e","#297bfe","#000f28","#3381fe","#001332","#3e87fe","#00173c","#488efe","#001b47","#5294fe","#001f51","#5c9afe","#00235b","#66a0fe","#002765","#70a7fe","#012b6f","#7aadfe","#012f79","#85b3fe","#013383","#8fbafe","#01378e","#99c0ff","#013b98","#a3c6ff","#013fa2","#adccff","#0142ac","#b7d3ff","#0146b6","#c2d9ff","#014ac0","#ccdfff","#014ecb","#d6e6ff","#0152d5","#e0ecff","#0156df","#eaf2ff","#015ae9","#f4f8ff","#015ef3","#feffff","#0162fd"]
+      //   ["#000000","#6f00ff","#04000a","#740aff","#090014","#7a14ff","#0d001f","#801fff","#120029","#8629ff","#160033","#8b33ff","#1b003d","#913dff","#1f0047","#9747ff","#230052","#9d52ff","#28005c","#a35cff","#2c0066","#a866ff","#310070","#ae70ff","#35007a","#b47aff","#390085","#ba85ff","#3e008f","#bf8fff","#420099","#c599ff","#4700a3","#cba3ff","#4b00ad","#d1adff","#5000b8","#d7b8ff","#5400c2","#dcc2ff","#5800cc","#e2ccff","#5d00d6","#e8d6ff","#6100e0","#eee0ff","#6600eb","#f3ebff","#6a00f5","#f9f5ff","#6f00ff","#000000","#740aff","#04000a","#7a14ff","#090014","#801fff","#0d001f","#8629ff","#120029","#8b33ff","#160033","#913dff","#1b003d","#9747ff","#1f0047","#9d52ff","#230052","#a35cff","#28005c","#a866ff","#2c0066","#ae70ff","#310070","#b47aff","#35007a","#ba85ff","#390085","#bf8fff","#3e008f","#c599ff","#420099","#cba3ff","#4700a3","#d1adff","#4b00ad","#d7b8ff","#5000b8","#dcc2ff","#5400c2","#e2ccff","#5800cc","#e8d6ff","#5d00d6","#eee0ff","#6100e0","#f3ebff","#6600eb","#f9f5ff","#6a00f5"]
+
+      //   )  
+
+      var color = 
+              ["#000000","#6f00ff","#04000a","#740aff","#090014","#7a14ff","#0d001f","#801fff","#120029","#8629ff","#160033","#8b33ff","#1b003d","#913dff","#1f0047","#9747ff","#230052","#9d52ff","#28005c","#a35cff","#2c0066","#a866ff","#310070","#ae70ff","#35007a","#b47aff","#390085","#ba85ff","#3e008f","#bf8fff","#420099","#c599ff","#4700a3","#cba3ff","#4b00ad","#d1adff","#5000b8","#d7b8ff","#5400c2","#dcc2ff","#5800cc","#e2ccff","#5d00d6","#e8d6ff","#6100e0","#eee0ff","#6600eb","#f3ebff","#6a00f5","#f9f5ff","#6f00ff","#000000","#740aff","#04000a","#7a14ff","#090014","#801fff","#0d001f","#8629ff","#120029","#8b33ff","#160033","#913dff","#1b003d","#9747ff","#1f0047","#9d52ff","#230052","#a35cff","#28005c","#a866ff","#2c0066","#ae70ff","#310070","#b47aff","#35007a","#ba85ff","#390085","#bf8fff","#3e008f","#c599ff","#420099","#cba3ff","#4700a3","#d1adff","#4b00ad","#d7b8ff","#5000b8","#dcc2ff","#5400c2","#e2ccff","#5800cc","#e8d6ff","#5d00d6","#eee0ff","#6100e0","#f3ebff","#6600eb","#f9f5ff","#6a00f5"]
+
+      color = color.reverse();
   
       //stack the data
       var stackedData = d3.stack()
-      //   .offset(d3.stackOffsetSilhouette)
+        .offset(d3.stackOffsetSilhouette)
         .keys(keys)
         (data)
     
+
+ 
+
       // create a tooltip for highlighting hovered mission
       var Tooltip = svg
         .append("text")
@@ -155,7 +201,28 @@
         type_of_cost = "(without inflation)"
       }
 
-      console.log("total cost budget",total_budget)
+      var total_sorted = []
+      for(var i in total_budget){
+        total_sorted.push([i, +total_budget[i]])
+      }
+      total_sorted.sort(function compare(a,b){
+        return (a[1] - b[1])
+      })
+      console.log("total budget", total_sorted)
+      temp = []
+
+      var missions_sorted = []
+
+      for(var i in total_sorted){
+        missions_sorted.push(total_sorted[i][0])
+      }
+
+    temp.push(['Cassini', +total_budget['Cassini']])
+      console.log("total budget", missions_sorted.indexOf('Cassini'))
+
+
+
+      // console.log("total cost budget",total_budget)
       var mousemove = function(event, d) {
       //   console.log(d)
         Tooltip2
@@ -170,7 +237,7 @@
         d3.select(this)
         .style("stroke", "none")
         .style("opacity", 0.8)
-        d3.selectAll(".myArea").style("opacity", 1).style("stroke", "none");
+        d3.selectAll(".myArea").style("opacity", 1).style("stroke", "white");
   
         Tooltip2
         .style("opacity", 0)
@@ -192,7 +259,10 @@
         .enter()
         .append("path")
           .attr("class", "myArea")
-          .style("fill", function(d) { return color(d.key); })
+          // console.log("keyy",d[d["index"]][1]
+          .style("fill", function(d) { return color[missions_sorted.indexOf(d.key)]; })
+          .style("stroke", "white")
+          .style("opacity", 1)
           .attr("d", area)
           .on("mouseover", mouseover)
           .on("mousemove", mousemove)

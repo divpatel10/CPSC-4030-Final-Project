@@ -22,9 +22,11 @@ body {
 }
 
 .maingraph {
-  background-color: #ccc;
-  border-radius: 10px;
+  background-color: #fff;
+  border-radius: 3px;
   float: left;
+  height: 95vh;
+  width: 65vw;
 }
 .maingraph h1 {
   text-align: center;
@@ -43,10 +45,11 @@ body {
 
 .secondgraph {
   float: left;
-  height: 600px;
+  height: 47vh;
+  width: 31vw;
   transition: box-shadow 0.3s;
-  margin: 5px 15px;
-  border-radius: 10px;
+  margin: 2px 2px;
+  border-radius: 3px;
   border: 1px solid #ccc;
   background-color: #fff;
 }
@@ -57,13 +60,15 @@ body {
 
 
 .thirdgraph {
+  height: 47vh;
+  width: 31vw;
   transition: box-shadow 0.3s;
-  margin: 5px 15px;
-  border-radius: 10px;
+  margin: 2px 2px;
+  border-radius: 3px;
   border: 1px solid #ccc;
   background-color: #fff;
   float:left;
-  height: 600px;
+  /* height: 600px; */
 }
 .thirdgraph:hover {
   box-shadow: 2px 2px 4px 4px rgb(205 205 205);
@@ -79,8 +84,8 @@ body {
 .toggle-apollo{
   float: right;
   position: relative;
-  margin-right: -2.4vw;
-  margin-top: 6vh;
+  margin-right: -3.7vw;
+  margin-top: 6.5vh;
 }
 
 

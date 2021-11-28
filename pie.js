@@ -1,10 +1,11 @@
 function pieChart(fileName) {
-  var width = 600;
-  height = 600;
-  margin = 50;
+  var margin = {top: 20, right: 20, bottom: 20, left: 20}
+
+  var width = document.querySelector('.thirdgraph').offsetWidth - margin.left - margin.right ,
+ height = document.querySelector('.thirdgraph').offsetHeight - margin.top - margin.bottom 
 
   // The radius of the pieplot is half the width or half the height (smallest one).
-  var radius = Math.min(width, height) / 2 - margin;
+  var radius = Math.min(width, height) / 2 - 30;
 
   // append the svg object to the div called 'pieChart'
   var svg = d3
@@ -27,7 +28,7 @@ function pieChart(fileName) {
     .style("fill", "black")
     .attr("text-anchor", "middle")
     .attr("dx", width / 2)
-    .attr("dy", margin - 5)
+    .attr("dy", 30)
     .text("What is the cost distribution of " + fileName);
 
 
@@ -40,11 +41,13 @@ function pieChart(fileName) {
     .style("background-color", "#000")
 
     .attr("dx", width / 2)
-    .attr("dy", height - 20)
+    .attr("dy", height - 5)
    
 // Scale of the color
-  var color = d3.scaleOrdinal()
-  .range([ '#00bfff','#f4a460','#adff2f','#ff6347','#b0c4de','#ff00ff','#1e90ff','#f0e68c'  ]);
+  // var color = d3.scaleOrdinal()
+  // .range([ '#00bfff','#f4a460','#adff2f','#ff6347','#b0c4de','#ff00ff','#1e90ff','#f0e68c'  ]);
+  var color = d3.scaleOrdinal(d3.schemeSet2);
+
 // Create the pie chart based on the data
   var pie = d3
     .pie()
