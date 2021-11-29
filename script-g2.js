@@ -209,10 +209,10 @@ svg.selectAll("legends")
       .duration(15)
       .attr("y", d => y(d[1]))
       .attr("height", d => y(d[0]) - y(d[1]))
-      .delay(function(d,i){ return(i*45)})
+      .delay(function(d,i){ return((i*0.5)*45)})
 
 })
 
 }
 
-barChart("Europa Clipper");
+barChart("New Horizons");
