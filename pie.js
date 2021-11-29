@@ -1,6 +1,4 @@
-var filename;
 function pieChart(fileName) {
-  filename = fileName;
   var margin = {top: 20, right: 20, bottom: 20, left: 20}
 
   var width = document.querySelector('.thirdgraph').offsetWidth - margin.left - margin.right ,
@@ -70,13 +68,10 @@ function pieChart(fileName) {
     .innerRadius(radius - 40);
 
   d3.csv("./data/" + fileName + ".csv").then(function (d) {
-    // console.log("hereeee",d)
     var dst = d.filter((d) => {
       return d["Fiscal Year"] == "";
     });
     d = dst[0];
-
-    console.log("pie", d)
     delete d["Fiscal Year"];
     delete d["Notes"];
     delete d["Official LCC"];
@@ -103,11 +98,11 @@ function pieChart(fileName) {
     var mousemove = function(event, d) {
       hoverTitle.text("Cost of " + d.data["age"] + ": $" + d.data["population"]+ "millions");
       d3.select(this)
-      .transition()
       .attr('d', function(d){
         return d3.arc().innerRadius(0)
           .outerRadius(radius + 5)(d)
       })
+
     }
 
     var mouseout = function(event, d){
@@ -135,7 +130,6 @@ function pieChart(fileName) {
       .attr("fill", function (d) {
         return color(d.data.age);
       })
-      .attr("cursor", "pointer")
       // .attr("d", label)
       .on("mousemove", mousemove)
       .on("mouseout", mouseout)
@@ -144,11 +138,4 @@ function pieChart(fileName) {
   
 }
 // Call the function for the first time for Cassini data
-pieChart("New Horizons");
-
-
-
-function ViewAllCategories(){
-  document.getElementById("barchart").innerHTML = "";
-  barChart(filename, false, 1);
-}
+pieChart("Cassini");
