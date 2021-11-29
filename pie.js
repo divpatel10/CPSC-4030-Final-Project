@@ -68,10 +68,13 @@ function pieChart(fileName) {
     .innerRadius(radius - 40);
 
   d3.csv("./data/" + fileName + ".csv").then(function (d) {
+    // console.log("hereeee",d)
     var dst = d.filter((d) => {
       return d["Fiscal Year"] == "";
     });
     d = dst[0];
+
+    console.log("pie", d)
     delete d["Fiscal Year"];
     delete d["Notes"];
     delete d["Official LCC"];
@@ -119,9 +122,16 @@ function pieChart(fileName) {
       })
       // .attr("d", label)
       .on("mousemove", mousemove)
+      .on('click',(event,data)=> {
+        console.log(data.data["age"]);
+        document.getElementById("barchart").innerHTML = "";
+
+        barChart(fileName, true,data.data["age"] );
+        // call new function here 
+    })
 
   
   });
 }
 // Call the function for the first time for Cassini data
-pieChart("Cassini");
+pieChart("Europa Clipper");

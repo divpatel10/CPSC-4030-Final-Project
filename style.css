@@ -78,14 +78,15 @@ body {
 .toggle-inflation{
   position: relative;
   float: right;
-  margin-right: 10vw;
+  margin-right: 100px;
+  margin-top: 5px;
 }
 
 .toggle-apollo{
   float: right;
   position: relative;
-  margin-right: -3.7vw;
-  margin-top: 6.5vh;
+  margin-top: 75px;
+  margin-right: -63px ;
 }
 
 
