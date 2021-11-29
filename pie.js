@@ -98,11 +98,11 @@ function pieChart(fileName) {
     var mousemove = function(event, d) {
       hoverTitle.text("Cost of " + d.data["age"] + ": $" + d.data["population"]+ "millions");
       d3.select(this)
+      .transition()
       .attr('d', function(d){
         return d3.arc().innerRadius(0)
           .outerRadius(radius + 5)(d)
       })
-
     }
 
     var mouseout = function(event, d){
@@ -110,7 +110,7 @@ function pieChart(fileName) {
       .transition(300)
       .attr('d', function(d){
         return d3.arc().innerRadius(0)
-          .outerRadius(radius - 5(d))
+          .outerRadius(radius - 5)(d)
           
       })
 
