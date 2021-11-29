@@ -269,6 +269,7 @@
           .style("stroke", "white")
           .style("opacity", 1)
           .attr("d", area)
+          .attr("cursor", "pointer")
           .on("mouseover", mouseover)
           .on("mousemove", mousemove)
           .on("mouseleave", mouseleave)

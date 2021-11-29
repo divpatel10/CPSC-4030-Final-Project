@@ -1,4 +1,6 @@
+var filename;
 function pieChart(fileName) {
+  filename = fileName;
   var margin = {top: 20, right: 20, bottom: 20, left: 20}
 
   var width = document.querySelector('.thirdgraph').offsetWidth - margin.left - margin.right ,
@@ -120,6 +122,7 @@ function pieChart(fileName) {
       .attr("fill", function (d) {
         return color(d.data.age);
       })
+      .attr("cursor", "pointer")
       // .attr("d", label)
       .on("mousemove", mousemove)
       .on('click',(event,data)=> {
@@ -129,9 +132,17 @@ function pieChart(fileName) {
         barChart(fileName, true,data.data["age"] );
         // call new function here 
     })
+    
 
   
   });
 }
 // Call the function for the first time for Cassini data
 pieChart("Europa Clipper");
+
+
+
+function ViewAllCategories(){
+  document.getElementById("barchart").innerHTML = "";
+  barChart(filename, false, 1);
+}
