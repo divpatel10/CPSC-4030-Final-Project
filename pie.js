@@ -96,13 +96,25 @@ function pieChart(fileName) {
 
 
     var mousemove = function(event, d) {
-      
       hoverTitle.text("Cost of " + d.data["age"] + ": $" + d.data["population"]+ "millions");
+      d3.select(this)
+      .attr('d', function(d){
+        return d3.arc().innerRadius(0)
+          .outerRadius(radius + 5)(d)
+      })
 
     }
 
+    var mouseout = function(event, d){
+      d3.select(this)
+      .transition(300)
+      .attr('d', function(d){
+        return d3.arc().innerRadius(0)
+          .outerRadius(radius - 5(d))
+          
+      })
 
-  
+    }
 
     var arc = g
       .selectAll(".arc")
@@ -110,6 +122,7 @@ function pieChart(fileName) {
       .enter()
       .append("g")
       .attr("class", "arc")
+      
 
     arc
       .append("path")
@@ -119,9 +132,10 @@ function pieChart(fileName) {
       })
       // .attr("d", label)
       .on("mousemove", mousemove)
-
-  
+      .on("mouseout", mouseout)
+      
   });
+  
 }
 // Call the function for the first time for Cassini data
 pieChart("Cassini");
