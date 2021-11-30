@@ -7,7 +7,7 @@ function pieChart(fileName) {
  height = document.querySelector('.thirdgraph').offsetHeight - margin.top - margin.bottom 
 
   // The radius of the pieplot is half the width or half the height (smallest one).
-  var radius = Math.min(width, height) / 2 - 30;
+  var radius = Math.min(width-50, height-50) / 2 - 30;
 
   // append the svg object to the div called 'pieChart'
   var svg = d3
@@ -30,7 +30,7 @@ function pieChart(fileName) {
     .style("fill", "black")
     .attr("text-anchor", "middle")
     .attr("dx", width / 2)
-    .attr("dy", 20)
+    .attr("dy", 40)
     .text("What is the cost distribution of " + fileName);
 
 
@@ -45,6 +45,9 @@ function pieChart(fileName) {
     .attr("dx", width / 2)
     .attr("dy", height - 5)
    
+
+
+
 // Scale of the color
   // var color = d3.scaleOrdinal()
   // .range([ '#00bfff','#f4a460','#adff2f','#ff6347','#b0c4de','#ff00ff','#1e90ff','#f0e68c'  ]);
@@ -95,6 +98,30 @@ function pieChart(fileName) {
 
     d = data;
 
+    // console.log("d",data)
+
+    // svg.selectAll("legends")
+    // .data(data)
+    // .enter()
+    // .append("circle")
+    // .attr("cx", width - 160)
+    // .attr("cy", function(d,i){ return  i*20 - 30}) 
+    // .attr("r", 7)
+    // .style("fill", function (d) { console.log("reeeeee",d)
+    //   return color(d["age"]);
+    // })
+    //   svg.selectAll("mylabels")
+    //   .data(data)
+    //   .enter()
+    //   .append("text")
+    //     .attr("x", width - 150)
+    //     .attr("y", function(d,i){ return  i*20 - 30}) 
+    //     .style("fill", "black")
+    //     .text(function(d){ return d["age"]})
+    //     .attr("text-anchor", "left")
+    //     .style("alignment-baseline", "middle")
+    //     .style("font-size", "12px")
+  
 
 
     var mousemove = function(event, d) {
@@ -108,6 +135,7 @@ function pieChart(fileName) {
 
 
     }
+
 
     var mouseout = function(event, d){
       d3.select(this)

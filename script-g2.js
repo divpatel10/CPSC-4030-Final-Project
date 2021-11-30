@@ -88,7 +88,7 @@ function barChart (fileName, hasFilter, filterName){
   .style("text-anchor", "end");
   // Add the Y-axis
   var y = d3.scaleLinear()
-  .domain([0, d3.max(values)])
+  .domain([0, d3.max(values) + 100])
   .range([ height, 0 ]);
   svg.append("g")
   .call(d3.axisLeft(y));
@@ -136,7 +136,8 @@ function barChart (fileName, hasFilter, filterName){
       .attr("width",x.bandwidth())
       .attr("stroke", "black")
       .attr("stroke-width", "1px")
-  svg.selectAll("legends")
+  
+      svg.selectAll("legends")
   .data(uf_stackedData)
   .enter()
   .append("circle")

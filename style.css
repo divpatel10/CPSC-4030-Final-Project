@@ -24,7 +24,7 @@ body {
 
 .maingraph {
   background-color: #fff;
-  border-radius: 3px;
+  /* border-radius: 3px; */
   float: left;
   height: 95vh;
   width: 65vw;
@@ -34,9 +34,9 @@ body {
   margin-left: -300px;
 }
 
-.maingraph:hover {
+/* .maingraph:hover {
   box-shadow: 2px 2px 4px 4px rgb(205 205 205);
-}
+} */
 
 
 .secondary-graph{
@@ -46,35 +46,35 @@ body {
 
 .secondgraph {
   float: left;
-  height: 47vh;
-  width: 31vw;
+  height: 47.5vh;
+  width: 31.5vw;
   transition: box-shadow 0.3s;
-  margin: 2px 2px;
-  border-radius: 3px;
-  border: 1px solid #ccc;
+  /* margin: 2px 2px; */
+  /* border-radius: 3px; */
+  /* border: 1px solid #ccc; */
   background-color: #fff;
 }
 
-.secondgraph:hover {
+/* .secondgraph:hover {
   box-shadow: 2px 2px 4px 4px rgb(205 205 205);
-}
+} */
 
 
 .thirdgraph {
-  height: 47vh;
-  width: 31vw;
+  height: 47.5vh;
+  width: 31.5vw;
   transition: box-shadow 0.3s;
-  margin: 2px 2px;
-  border-radius: 3px;
-  border: 1px solid #ccc;
+  /* margin: 2px 2px; */
+  /* border-radius: 3px; */
+  /* border: 1px solid #ccc; */
   background-color: #fff;
   float:left;
   /* height: 600px; */
 }
-.thirdgraph:hover {
+/* .thirdgraph:hover {
   box-shadow: 2px 2px 4px 4px rgb(205 205 205);
   
-}
+} */
 
 .toggle-inflation{
   position: relative;
@@ -161,6 +161,7 @@ input:checked + .slider:before {
 
 #pieChart{
   margin-top: 25px ;
+  margin-left: -150px;
 }
 
 .view-all {
