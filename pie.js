@@ -1,4 +1,6 @@
+var filename;
 function pieChart(fileName) {
+  filename = fileName;
   var margin = {top: 20, right: 20, bottom: 20, left: 20}
 
   var width = document.querySelector('.thirdgraph').offsetWidth - margin.left - margin.right ,
@@ -28,7 +30,7 @@ function pieChart(fileName) {
     .style("fill", "black")
     .attr("text-anchor", "middle")
     .attr("dx", width / 2)
-    .attr("dy", 30)
+    .attr("dy", 20)
     .text("What is the cost distribution of " + fileName);
 
 
@@ -102,6 +104,8 @@ function pieChart(fileName) {
         return d3.arc().innerRadius(0)
           .outerRadius(radius + 5)(d)
       })
+      .attr("stroke", "black");
+
 
     }
 
@@ -113,6 +117,7 @@ function pieChart(fileName) {
           .outerRadius(radius - 5)(d)
           
       })
+      .attr("stroke", "none");
 
     }
 
@@ -130,10 +135,16 @@ function pieChart(fileName) {
       .attr("fill", function (d) {
         return color(d.data.age);
       })
+      .attr("cursor", "pointer")
       // .attr("d", label)
       .on("mousemove", mousemove)
       .on("mouseout", mouseout)
-      
+      .on('click',(event,data)=> {
+        console.log(data.data["age"]);
+        document.getElementById("barchart").innerHTML = "";
+        barChart(fileName, true,data.data["age"] );
+        // call new function here 
+    })
   });
   
 }

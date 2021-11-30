@@ -209,19 +209,19 @@
         // var max_val = 
         // for()
       
-        g_legend.append("g")
-                .call(legend_xAxis)
-                .select(".domain").remove();
+        // g_legend.append("g")
+        //         .call(legend_xAxis)
+        //         .select(".domain").remove();
 
-                var x_legend = d3.scaleLinear()
-                .domain(d3.extent(data, function(d) { return d.year; }))
-                .range([ 0, width ]);
+        //         var x_legend = d3.scaleLinear()
+        //         .domain(d3.extent(data, function(d) { return d.year; }))
+        //         .range([ 0, width ]);
           
-                svg.append("g").attr("class", "axis")
-                .attr("transform", "translate(0," + 40 + ")")
-                .attr("font-size", "20px")
-                .call(d3.axisBottom(x_legend).tickSize(-40).tickValues(lineRange))
-                .select(".domain").remove()
+        //         svg.append("g").attr("class", "axis")
+        //         .attr("transform", "translate(0," + 40 + ")")
+        //         .attr("font-size", "20px")
+        //         .call(d3.axisBottom(x_legend).tickSize(-40).tickValues(lineRange))
+        //         .select(".domain").remove()
                 
           
 
