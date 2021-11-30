@@ -138,7 +138,7 @@ function pieChart(fileName) {
   });
 }
 // Call the function for the first time for Cassini data
-pieChart("New Horizons");
+pieChart("Galileo");
 
 
 

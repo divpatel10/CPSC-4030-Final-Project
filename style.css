@@ -167,3 +167,12 @@ input:checked + .slider:before {
   margin-left: -42rem;
   margin-top: -300px;
 }
+
+#gradient-legend{
+  height: 25px;
+  width: 200px;
+  background: linear-gradient(90deg, rgba(221,194,255,1) 0%, rgba(140,52,255,1) 29%, rgba(13,0,31,1) 100%); 
+  float: right;
+  margin-right: 300px;
+  margin-top: -45px;
+}

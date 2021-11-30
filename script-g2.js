@@ -215,4 +215,4 @@ svg.selectAll("legends")
 
 }
 
-barChart("New Horizons");
+barChart("Galileo");

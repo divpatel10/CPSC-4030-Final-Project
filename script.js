@@ -102,36 +102,7 @@
       var y = d3.scaleLinear()
       .domain([ -domain_val, domain_val])
       .range([ height, 0 ]);
-  
-      // svg.append("g").attr("class", "axis")
-      // .call(d3.axisLeft(y));
-      // svg.append("text")
-      //     .attr("x", -150)
-      //     .attr("y", -90)
-      //     .attr("transform", "rotate(-90)")
-      //     .attr("dy", ".4em")
-      //     .style("text-anchor", "end")
-      //     .style("font-size", "2.45em")
-      //     .text("Budget in millions ($)");
-    
-      // // color palette
-      // const color = d3.scaleOrdinal()
-      // .domain(keys)
-      // .range([
-      //   '#e0ffff','#b9d9eb','#7df9ff','#7FFFD4','#6CB4EE','#007FFF','#89CFF0','#0000FF',
-      //   '#318CE7','#5072A7','#6699CC','#0039a6','#13274F','#0a2351','#3457D5','#5F9EA0',
-      //   '#00BFFF','#0CAFFF','#1034A6','#7DF9FF','#15f4ee','#3F00FF','#6050DC','#1ca9c9',
-      //   '#4B9CD3','#B9D9EB','#012169','#6F00FF','#2c3968','#00416A','#0077c0','#002244',
-      //   '#2a52be','#00FFFF','#1E90FF','#003399','#073980','#E0FFFF','#00538C',
-      //   '#034694','#00BFFF','#008E97','#1877F2','#99FFFF','#87CEFA','#0000CD','#000080'
-      // ])  
-      // const color = d3.scaleOrdinal()
-      // .domain(missions_sorted)
-      // .range(
-      //   //BLUE ["#000c1e","#1f75fe","#000f28","#297bfe","#001332","#3381fe","#00173c","#3e87fe","#001b47","#488efe","#001f51","#5294fe","#00235b","#5c9afe","#002765","#66a0fe","#012b6f","#70a7fe","#012f79","#7aadfe","#013383","#85b3fe","#01378e","#8fbafe","#013b98","#99c0ff","#013fa2","#a3c6ff","#0142ac","#adccff","#0146b6","#b7d3ff","#014ac0","#c2d9ff","#014ecb","#ccdfff","#0152d5","#d6e6ff","#0156df","#e0ecff","#015ae9","#eaf2ff","#015ef3","#f4f8ff","#0162fd","#feffff","#0b68fe","#00040a","#156efe","#000814","#1f75fe","#000c1e","#297bfe","#000f28","#3381fe","#001332","#3e87fe","#00173c","#488efe","#001b47","#5294fe","#001f51","#5c9afe","#00235b","#66a0fe","#002765","#70a7fe","#012b6f","#7aadfe","#012f79","#85b3fe","#013383","#8fbafe","#01378e","#99c0ff","#013b98","#a3c6ff","#013fa2","#adccff","#0142ac","#b7d3ff","#0146b6","#c2d9ff","#014ac0","#ccdfff","#014ecb","#d6e6ff","#0152d5","#e0ecff","#0156df","#eaf2ff","#015ae9","#f4f8ff","#015ef3","#feffff","#0162fd"]
-      //   ["#000000","#6f00ff","#04000a","#740aff","#090014","#7a14ff","#0d001f","#801fff","#120029","#8629ff","#160033","#8b33ff","#1b003d","#913dff","#1f0047","#9747ff","#230052","#9d52ff","#28005c","#a35cff","#2c0066","#a866ff","#310070","#ae70ff","#35007a","#b47aff","#390085","#ba85ff","#3e008f","#bf8fff","#420099","#c599ff","#4700a3","#cba3ff","#4b00ad","#d1adff","#5000b8","#d7b8ff","#5400c2","#dcc2ff","#5800cc","#e2ccff","#5d00d6","#e8d6ff","#6100e0","#eee0ff","#6600eb","#f3ebff","#6a00f5","#f9f5ff","#6f00ff","#000000","#740aff","#04000a","#7a14ff","#090014","#801fff","#0d001f","#8629ff","#120029","#8b33ff","#160033","#913dff","#1b003d","#9747ff","#1f0047","#9d52ff","#230052","#a35cff","#28005c","#a866ff","#2c0066","#ae70ff","#310070","#b47aff","#35007a","#ba85ff","#390085","#bf8fff","#3e008f","#c599ff","#420099","#cba3ff","#4700a3","#d1adff","#4b00ad","#d7b8ff","#5000b8","#dcc2ff","#5400c2","#e2ccff","#5800cc","#e8d6ff","#5d00d6","#eee0ff","#6100e0","#f3ebff","#6600eb","#f9f5ff","#6a00f5"]
 
-      //   )  
 
       var color = 
               [
@@ -221,7 +192,41 @@
         missions_sorted.push(total_sorted[i][0])
       }
 
-      // console.log("total budget", missions_sorted)
+      console.log("total budget", total_sorted)
+
+      // Color Legend 
+      var svgLegend = d3.select("#gradient-legend");
+      var g_legend = svgLegend.append("g").attr("transform", "translate(" + 30 + ", 0)");
+
+      var legend_xScale = d3.scaleLinear()
+                          .range([0, 200])
+                          .domain(d3.extent(total_sorted, function(d) { return d[1]; }))
+
+      var legend_xAxis = d3.axisBottom(legend_xScale)
+                        .tickSize(135)  
+                        .tickValues(total_sorted.filter(d => d[1] % 50 === 0).map(d => d[1]))
+
+        var legendValues;
+        // var min_val = total_sorted[0][1
+        // var max_val = 
+        // for()
+      
+        g_legend.append("g")
+                .call(legend_xAxis)
+                .select(".domain").remove();
+
+                var x_legend = d3.scaleLinear()
+                .domain(d3.extent(data, function(d) { return d.year; }))
+                .range([ 0, width ]);
+          
+                svg.append("g").attr("class", "axis")
+                .attr("transform", "translate(0," + 40 + ")")
+                .attr("font-size", "20px")
+                .call(d3.axisBottom(x_legend).tickSize(-40).tickValues(lineRange))
+                .select(".domain").remove()
+                
+          
+
 
 
 
@@ -244,7 +249,6 @@
   
         Tooltip2
         .style("opacity", 0)
-
   
        }
     
