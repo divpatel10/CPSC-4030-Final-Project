@@ -9,6 +9,7 @@ body {
   
 #title{
     text-align: center;
+    margin-left: -100px;
     font-size: xxx-large;
 }
 
@@ -177,4 +178,9 @@ input:checked + .slider:before {
   left: 90vw;
   z-index: 2;
 
+}
+
+h2{
+  text-align: center;
+  margin-left: -250px;
 }
