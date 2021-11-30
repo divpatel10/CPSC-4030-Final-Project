@@ -154,6 +154,8 @@ input:checked + .slider:before {
   float: right;
   margin-right: 300px;
   margin-top: -45px;
+  overflow:visible;
+
 } 
 
 #pieChart{

@@ -17,6 +17,7 @@ var isManned = false;
                 console.log('Not checked');
               }
               document.getElementById("main-graph").innerHTML = "";
+              document.getElementById("gradient-legend").innerHTML = "";
               runMainGraph(isInflationData, fileName, isManned);
             });
 
@@ -38,6 +39,7 @@ var isManned = false;
                 console.log('Not checked');
               }
               document.getElementById("main-graph").innerHTML = "";
+              document.getElementById("gradient-legend").innerHTML = "";
               runMainGraph(isInflationData, fileName, isManned);
             });
 

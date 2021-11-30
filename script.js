@@ -105,10 +105,9 @@
 
 
       var color = 
-              ["#000000","#6f00ff","#04000a","#740aff","#090014","#7a14ff","#0d001f","#801fff","#120029","#8629ff","#160033","#8b33ff","#1b003d","#913dff","#1f0047","#9747ff","#230052","#9d52ff","#28005c","#a35cff","#2c0066","#a866ff","#310070","#ae70ff","#35007a","#b47aff","#390085","#ba85ff","#3e008f","#bf8fff","#420099","#c599ff","#4700a3","#cba3ff","#4b00ad","#d1adff","#5000b8","#d7b8ff","#5400c2","#dcc2ff","#5800cc","#e2ccff","#5d00d6","#e8d6ff","#6100e0","#eee0ff","#6600eb","#f3ebff","#6a00f5","#f9f5ff","#6f00ff","#000000","#740aff","#04000a","#7a14ff","#090014","#801fff","#0d001f","#8629ff","#120029","#8b33ff","#160033","#913dff","#1b003d","#9747ff","#1f0047","#9d52ff","#230052","#a35cff","#28005c","#a866ff","#2c0066","#ae70ff","#310070","#b47aff","#35007a","#ba85ff","#390085","#bf8fff","#3e008f","#c599ff","#420099","#cba3ff","#4700a3","#d1adff","#4b00ad","#d7b8ff","#5000b8","#dcc2ff","#5400c2","#e2ccff","#5800cc","#e8d6ff","#5d00d6","#eee0ff","#6100e0","#f3ebff","#6600eb","#f9f5ff","#6a00f5"]
-
-      color = color.reverse();
-  
+      ["#0D001F","#120029","#160034","#1B003E","#1F0048","#240052","#28005C","#2C0067","#310071","#35007B","#3A0085","#3E008F","#43009A","#4700A4","#4B00AE","#5000B8","#5400C2","#5900CD","#5D00D7","#6100E1","#6600EB","#6A00F5","#6F01FF","#750BFF","#7A15FF","#801FFF","#8629FF","#8C34FF","#913EFF","#9748FF","#9D52FF","#A35CFF","#A967FF","#AE71FF","#B47BFF","#BA85FF","#C08FFF","#C59AFF","#CBA4FF","#D1AEFF","#D7B8FF","#DDC2FF","#E2CDFF","#E8D7FF","#EEE1FF","#F4EBFF","#FAF5FF"]    
+        color = color.reverse();
+      console.log(color)
       //stack the data
       var stackedData = d3.stack()
         .offset(d3.stackOffsetSilhouette)
@@ -193,40 +192,57 @@
       console.log("total budget", total_sorted)
 
       // Color Legend 
-      var svgLegend = d3.select("#gradient-legend");
-      var g_legend = svgLegend.append("g").attr("transform", "translate(" + 30 + ", 0)");
+      // var svgLegend = d3.select("#gradient-legend");
+      // var g_legend = svgLegend.append("g").attr("transform", "translate(" + 30 + ", 0)");
 
-      var legend_xScale = d3.scaleLinear()
-                          .range([0, 200])
-                          .domain(d3.extent(total_sorted, function(d) { return d[1]; }))
+      // var legend_xScale = d3.scaleLinear()
+      //                     .range([0, 200])
+      //                     .domain(d3.extent(total_sorted, function(d) { return d[1]; }))
 
-      var legend_xAxis = d3.axisBottom(legend_xScale)
-                        .tickSize(135)  
-                        .tickValues(total_sorted.filter(d => d[1] % 50 === 0).map(d => d[1]))
-
-        var legendValues;
-        // var min_val = total_sorted[0][1
-        // var max_val = 
-        // for()
-      
-        // g_legend.append("g")
-        //         .call(legend_xAxis)
-        //         .select(".domain").remove();
-
-        //         var x_legend = d3.scaleLinear()
-        //         .domain(d3.extent(data, function(d) { return d.year; }))
-        //         .range([ 0, width ]);
-          
-        //         svg.append("g").attr("class", "axis")
-        //         .attr("transform", "translate(0," + 40 + ")")
-        //         .attr("font-size", "20px")
-        //         .call(d3.axisBottom(x_legend).tickSize(-40).tickValues(lineRange))
-        //         .select(".domain").remove()
-                
-          
+      // var legend_xAxis = d3.axisBottom(legend_xScale)
+      //                   .tickSize(135)  
+      //                   .tickValues(total_sorted.filter(d => d[1] % 50 === 0).map(d => d[1]))
 
 
+      var legendRange = []
+      var min_leg = Math.round(total_sorted[0][1]/50)*50;
+      var max_leg = Math.round(total_sorted[total_sorted.length-1][1]/50)*50;
 
+      console.log("l2egend range",total_sorted[total_sorted.length-1][1])
+      // legendRange.push(min_leg)
+      for(let i = min_leg; i <= max_leg; i+=((max_leg - min_leg)/2)){
+        temp = Math.round(i/100)*100 ;
+        legendRange.push(temp)
+        i = i + min_leg;
+      }
+        legendRange.push(max_leg)
+      console.log("legend range",legendRange)
+
+      var svg_legend = d3.select("#gradient-legend");
+    // Add X axis
+    var x_legend = d3.scaleLinear()
+    .domain(d3.extent(total_sorted, function(d) { return d[1];}))
+    .range([ 0, 200]);
+
+    
+
+
+    svg_legend.append("g").attr("class", "axis")
+    .attr("transform", "translate(0," + 25 + ")")
+    .call(d3.axisBottom(x_legend).tickSize(-25).tickValues(legendRange))
+    .selectAll("text")
+    .attr("font-size", "12px");
+
+    svg_legend.append("text")
+    .style("font", "14px sans-serif")
+    .style("fill", "black")
+    .attr("text-anchor", "middle")
+    .attr("dx", 100)
+    .attr("dy", 50)
+    .text("in millions ($)");
+    // .attr("margin-top", "115px")
+    // .attr("transform", "rotate(-60)")
+  
 
       // console.log("total cost budget",total_budget)
       var mousemove = function(event, d) {
@@ -265,7 +281,7 @@
         .append("path")
           .attr("class", "myArea")
           // console.log("keyy",d[d["index"]][1]
-          .style("fill", function(d) { return color[missions_sorted.indexOf(d.key)]; })
+          .style("fill", function(d) {console.log("key: ", d.key, "color", color[missions_sorted.indexOf(d.key)]); return color[missions_sorted.indexOf(d.key)]; })
           .style("stroke", "white")
           .style("opacity", 1)
           .attr("d", area)
