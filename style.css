@@ -147,3 +147,31 @@ input:checked + .slider:before {
   white-space: nowrap;
   margin-left: -30px;
 }
+
+/* #pieChart{
+  cursor: pointer;
+} */
+
+.view-all {
+  background-color: #ff0000;
+  top: 0px;
+  color: white;
+  padding: 10px 12px;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+  width: auto;
+  height: auto;
+  margin-left: -42rem;
+  margin-top: -300px;
+}
+
+#gradient-legend{
+  height: 25px;
+  width: 200px;
+  background: linear-gradient(90deg, rgba(221,194,255,1) 0%, rgba(140,52,255,1) 29%, rgba(13,0,31,1) 100%); 
+  float: right;
+  margin-right: 300px;
+  margin-top: -45px;
+}

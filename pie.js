@@ -138,4 +138,12 @@ function pieChart(fileName) {
   
 }
 // Call the function for the first time for Cassini data
-pieChart("Cassini");
+
+pieChart("Galileo");
+
+
+
+function ViewAllCategories(){
+  document.getElementById("barchart").innerHTML = "";
+  barChart(filename, false, 1);
+}

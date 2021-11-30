@@ -164,4 +164,4 @@ svg.selectAll("legends")
 
 }
 
-barChart("Viking");
+barChart("Galileo");
