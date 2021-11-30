@@ -239,7 +239,7 @@
     .attr("text-anchor", "middle")
     .attr("dx", 100)
     .attr("dy", 55)
-    .text("in millions ($)");
+    .text("Spending in millions ($)");
     // .attr("margin-top", "115px")
     // .attr("transform", "rotate(-60)")
   
