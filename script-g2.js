@@ -1,4 +1,4 @@
-function barChart (fileName, hasFilter, filterName){
+function barChart (fileName){
 
   
 var margin = {top: 40, right: 30, bottom: 50, left: 60},
@@ -27,32 +27,20 @@ delete data[d]["Notes"];
 delete data[d]["Official LCC"];
 delete data[d]["Total Cost"];
 delete data[d]["Total Cost (inflation adj)"];
-
-
 for(prop in data[d]){
   data[d][prop] = +data[d][prop].split('$').join('').replaceAll(",", "");         
 }
-
-
 }
 
 data = data.filter((d) => {
 return d["Fiscal Year"] != "";
 
 })
-
-
-
-
-
-
-// console.log("Ayy", data[0])
-
-
+// console.log("Ayy", data)
 var values = []
 for(d in data){
   temp = 0
-  for(var prop in data[d]){
+  for(prop in data[d]){
     if(prop != "Fiscal Year"){
       temp = temp+data[d][prop]
     }
@@ -60,47 +48,16 @@ for(d in data){
   }
   values.push(temp)
 }
-
-
-var data_before  = data.map(a => ({...a}));
-
-  // console.log(values)
-  var color = ["#66c2a5", "#fc8d62","#8da0cb","#e78ac3","#a6d854","#ffd92f","#e5c494","#b3b3b3"]
-
-  var color_map={};
-  Object.keys(data[0]).forEach(function(d,i){
-    if(d != "Fiscal Year")
-    color_map[d] = color[i-1];
-  });
-  
-  console.log("cmap", color_map)
-  
-for (d in data){
-
-  if(hasFilter){
-    Object.keys(data[d]).forEach(function(dt){
-      // console.log("dt",dt)
-      if(dt != filterName &&  dt != "Fiscal Year") {
-        // console.log("deleted", dt, "filename", filterName)
-        delete data[d][dt];
-      }
-    });
-  
-  }
-  }
-
-
-  // console.log("data before",data_before)
+console.log(values)
 
 const subgroups = Object.keys(data[0]).slice(1)
-const subgroups_uf = Object.keys(data_before[0]).slice(1)
-// console.log("Subgroups",subgroups)
+console.log("Subgroups",subgroups)
 
 const groups = []
 for(d in data){
 groups.push(data[d]["Fiscal Year"])
 }
-// console.log("Groups",groups)
+console.log("Groups",groups)
 
 // Add the X-axis
 var x = d3.scaleBand()
@@ -136,9 +93,8 @@ svg.append("text")
           .style("font-size", "1.45em")
           .text("Budget in millions ($)");
 
+          var color = d3.scaleOrdinal(d3.schemeSet2);
 
-
-          
   //Title of the chart
   var chartTitle = svg
   .append("text")
@@ -155,13 +111,6 @@ var stackedData = d3.stack()
 .keys(subgroups)
 (data)
 
-var uf_stackedData = d3.stack()
-.keys(subgroups_uf)
-(data_before)
-
-
-
-// console.log("stacked", unfiltered_stackedData)
 // console.log(stackedData)
 
 
@@ -170,7 +119,7 @@ svg.append("g")
 .selectAll("g")
 .data(stackedData)
 .join("g")
-  .attr("fill", function(d){console.log("color val",color_map[d.key]); return color_map[d.key]})
+  .attr("fill", d => color(d.key))
   .attr("class", d => "myRect " + d.key ) 
   .selectAll("rect")
   .data(d => d)
@@ -183,16 +132,16 @@ svg.append("g")
     .attr("stroke-width", "1px")
 
 svg.selectAll("legends")
-.data(uf_stackedData)
+.data(stackedData)
 .enter()
 .append("circle")
 .attr("cx", width - 160)
 .attr("cy", function(d,i){ return 15 + i*20}) 
 .attr("r", 7)
-.style("fill", function(d){  return color_map[d.key]})
+.style("fill", function(d){ return color(d.key)})
 
   svg.selectAll("mylabels")
-  .data(uf_stackedData)
+  .data(stackedData)
   .enter()
   .append("text")
     .attr("x", width - 150)
@@ -209,7 +158,7 @@ svg.selectAll("legends")
       .duration(15)
       .attr("y", d => y(d[1]))
       .attr("height", d => y(d[0]) - y(d[1]))
-      .delay(function(d,i){ return((i*0.5)*45)})
+      .delay(function(d,i){ return(i*45)})
 
 })
 

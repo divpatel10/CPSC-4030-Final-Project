@@ -105,14 +105,9 @@
 
 
       var color = 
-              [
-                
-"#0D001F","#120029","#160034","#1B003E","#1F0048","#240052","#28005C","#2C0067","#310071","#35007B","#3A0085","#3E008F","#43009A","#4700A4","#4B00AE","#5000B8","#5400C2","#5900CD","#5D00D7","#6100E1","#6600EB","#6A00F5","#6F01FF","#750BFF","#7A15FF","#801FFF","#8629FF","#8C34FF","#913EFF","#9748FF","#9D52FF","#A35CFF","#A967FF","#AE71FF","#B47BFF","#BA85FF","#C08FFF","#C59AFF","#CBA4FF","#D1AEFF","#D7B8FF","#DDC2FF","#E2CDFF","#E8D7FF","#EEE1FF","#F4EBFF","#FAF5FF"]
-
-                
+              ["#000000","#6f00ff","#04000a","#740aff","#090014","#7a14ff","#0d001f","#801fff","#120029","#8629ff","#160033","#8b33ff","#1b003d","#913dff","#1f0047","#9747ff","#230052","#9d52ff","#28005c","#a35cff","#2c0066","#a866ff","#310070","#ae70ff","#35007a","#b47aff","#390085","#ba85ff","#3e008f","#bf8fff","#420099","#c599ff","#4700a3","#cba3ff","#4b00ad","#d1adff","#5000b8","#d7b8ff","#5400c2","#dcc2ff","#5800cc","#e2ccff","#5d00d6","#e8d6ff","#6100e0","#eee0ff","#6600eb","#f3ebff","#6a00f5","#f9f5ff","#6f00ff","#000000","#740aff","#04000a","#7a14ff","#090014","#801fff","#0d001f","#8629ff","#120029","#8b33ff","#160033","#913dff","#1b003d","#9747ff","#1f0047","#9d52ff","#230052","#a35cff","#28005c","#a866ff","#2c0066","#ae70ff","#310070","#b47aff","#35007a","#ba85ff","#390085","#bf8fff","#3e008f","#c599ff","#420099","#cba3ff","#4700a3","#d1adff","#4b00ad","#d7b8ff","#5000b8","#dcc2ff","#5400c2","#e2ccff","#5800cc","#e8d6ff","#5d00d6","#eee0ff","#6100e0","#f3ebff","#6600eb","#f9f5ff","#6a00f5"]
 
       color = color.reverse();
-      // console.log(color)
   
       //stack the data
       var stackedData = d3.stack()
@@ -184,7 +179,8 @@
       total_sorted.sort(function compare(a,b){
         return (a[1] - b[1])
       })
-      // console.log("total budget", total_sorted)
+      console.log("total budget", total_sorted)
+      temp = []
 
       var missions_sorted = []
 
@@ -192,6 +188,8 @@
         missions_sorted.push(total_sorted[i][0])
       }
 
+//     temp.push(['Cassini', +total_budget['Cassini']])
+//       console.log("total budget", missions_sorted.indexOf('Cassini'))
       console.log("total budget", total_sorted)
 
       // Color Legend 
@@ -267,18 +265,15 @@
         .append("path")
           .attr("class", "myArea")
           // console.log("keyy",d[d["index"]][1]
-          .style("fill", function(d) { 
-            // console.log(d.key, missions_sorted.indexOf(d.key), color[missions_sorted.indexOf(d.key)]);
-             return color[missions_sorted.indexOf(d.key)]; })
+          .style("fill", function(d) { return color[missions_sorted.indexOf(d.key)]; })
           .style("stroke", "white")
           .style("opacity", 1)
           .attr("d", area)
-          .attr("cursor", "pointer")
           .on("mouseover", mouseover)
           .on("mousemove", mousemove)
           .on("mouseleave", mouseleave)
           .on('click',(event,data)=> {
-            // console.log(data["key"]);
+            console.log(data["key"]);
             document.getElementById("pieChart").innerHTML = "";
             pieChart(data["key"]);
   
