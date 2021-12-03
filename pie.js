@@ -58,8 +58,8 @@ function pieChart(fileName) {
     .pie()
     .sort(null)
     .value(function (d) {
-      // console.log("AAAA", d.population)
-      return d.population;
+      // console.log("AAAA", d.value)
+      return d.value;
     });
 
   var path = d3
@@ -84,13 +84,13 @@ function pieChart(fileName) {
     delete d["Total Cost (inflation adj)"];
 
 // Restructure the data
-    var data = Object.entries(d).map(([age, population]) => ({
-      age,
-      population,
+    var data = Object.entries(d).map(([key, value]) => ({
+      key,
+      value,
     }));
 
     for (d in data) {
-      data[d].population = +data[d].population
+      data[d].value = +data[d].value
         .slice(1, data[d].length)
         .replaceAll(",", "");
     }
@@ -108,7 +108,7 @@ function pieChart(fileName) {
     // .attr("cy", function(d,i){ return  i*20 - 30}) 
     // .attr("r", 7)
     // .style("fill", function (d) { console.log("reeeeee",d)
-    //   return color(d["age"]);
+    //   return color(d["key"]);
     // })
     //   svg.selectAll("mylabels")
     //   .data(data)
@@ -117,7 +117,7 @@ function pieChart(fileName) {
     //     .attr("x", width - 150)
     //     .attr("y", function(d,i){ return  i*20 - 30}) 
     //     .style("fill", "black")
-    //     .text(function(d){ return d["age"]})
+    //     .text(function(d){ return d["key"]})
     //     .attr("text-anchor", "left")
     //     .style("alignment-baseline", "middle")
     //     .style("font-size", "12px")
@@ -125,7 +125,7 @@ function pieChart(fileName) {
 
 
     var mousemove = function(event, d) {
-      hoverTitle.text("Cost of " + d.data["age"] + ": $" + d.data["population"]+ "millions");
+      hoverTitle.text("Cost of " + d.data["key"] + ": $" + d.data["value"]+ "millions");
       d3.select(this)
       .attr('d', function(d){
         return d3.arc().innerRadius(0)
@@ -161,19 +161,56 @@ function pieChart(fileName) {
       .append("path")
       .attr("d", path)
       .attr("fill", function (d) {
-        return color(d.data.age);
+        return color(d.data.key);
       })
       .attr("cursor", "pointer")
       // .attr("d", label)
       .on("mousemove", mousemove)
       .on("mouseout", mouseout)
       .on('click',(event,data)=> {
-        console.log(data.data["age"]);
+        console.log(data.data["key"]);
         document.getElementById("barchart").innerHTML = "";
-        barChart(fileName, true,data.data["age"] );
+        barChart(fileName, true,data.data["key"] );
         // call new function here 
     })
   });
+
+
+  // Add the polylines between chart and labels:
+// svg
+// .selectAll('allPolylines')
+// .data(data_ready)
+// .enter()
+// .append('polyline')
+//   .attr("stroke", "black")
+//   .style("fill", "none")
+//   .attr("stroke-width", 1)
+//   .attr('points', function(d) {
+//     var posA = arc.centroid(d) // line insertion in the slice
+//     var posB = outerArc.centroid(d) // line break: we use the other arc generator that has been built only for that
+//     var posC = outerArc.centroid(d); // Label position = almost the same as posB
+//     var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2 // we need the angle to see if the X position will be at the extreme right or extreme left
+//     posC[0] = radius * 0.95 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
+//     return [posA, posB, posC]
+//   })
+
+// // Add the polylines between chart and labels:
+// svg
+// .selectAll('allLabels')
+// .data(data_ready)
+// .enter()
+// .append('text')
+//   .text( function(d) { console.log(d.data.key) ; return d.data.key } )
+//   .attr('transform', function(d) {
+//       var pos = outerArc.centroid(d);
+//       var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
+//       pos[0] = radius * 0.99 * (midangle < Math.PI ? 1 : -1);
+//       return 'translate(' + pos + ')';
+//   })
+//   .style('text-anchor', function(d) {
+//       var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
+//       return (midangle < Math.PI ? 'start' : 'end')
+//   })
   
 }
 // Call the function for the first time for Cassini data

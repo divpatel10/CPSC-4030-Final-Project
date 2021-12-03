@@ -163,6 +163,9 @@ function barChart (fileName, hasFilter, filterName){
         .attr("height", d => y(d[0]) - y(d[1]))
         .delay(function(d,i){ return((i*0.5)*45)})
   })
+
+
+  
   
   }
 
