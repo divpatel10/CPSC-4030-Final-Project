@@ -98,7 +98,7 @@
       }
       
       var domain_val = yScaleOffset+d3.max(missionWiseData, d => d3.max(d.values, c => c.degrees))
-      console.log("domain_val", domain_val)
+      // console.log("domain_val", domain_val)
       var y = d3.scaleLinear()
       .domain([ -domain_val, domain_val])
       .range([ height, 0 ]);
@@ -107,7 +107,7 @@
       var color = 
       ["#0D001F","#120029","#160034","#1B003E","#1F0048","#240052","#28005C","#2C0067","#310071","#35007B","#3A0085","#3E008F","#43009A","#4700A4","#4B00AE","#5000B8","#5400C2","#5900CD","#5D00D7","#6100E1","#6600EB","#6A00F5","#6F01FF","#750BFF","#7A15FF","#801FFF","#8629FF","#8C34FF","#913EFF","#9748FF","#9D52FF","#A35CFF","#A967FF","#AE71FF","#B47BFF","#BA85FF","#C08FFF","#C59AFF","#CBA4FF","#D1AEFF","#D7B8FF","#DDC2FF","#E2CDFF","#E8D7FF","#EEE1FF","#F4EBFF","#FAF5FF"]    
         color = color.reverse();
-      console.log(color)
+      // console.log(color)
       //stack the data
       var stackedData = d3.stack()
         .offset(d3.stackOffsetSilhouette)
@@ -178,7 +178,7 @@
       total_sorted.sort(function compare(a,b){
         return (a[1] - b[1])
       })
-      console.log("total budget", total_sorted)
+      // console.log("total budget", total_sorted)
       temp = []
 
       var missions_sorted = []
@@ -193,7 +193,7 @@
       var min_leg = Math.round(total_sorted[0][1]/50)*50;
       var max_leg = Math.round(total_sorted[total_sorted.length-1][1]/50)*50;
 
-      console.log("l2egend range",total_sorted[total_sorted.length-1][1])
+      // console.log("l2egend range",total_sorted[total_sorted.length-1][1])
       // legendRange.push(min_leg)
       for(let i = min_leg; i <= max_leg; i+=((max_leg - min_leg)/2)){
         temp = Math.round(i/100)*100 ;
@@ -201,7 +201,7 @@
         i = i + min_leg;
       }
         legendRange.push(max_leg)
-      console.log("legend range",legendRange)
+      // console.log("legend range",legendRange)
 
       var svg_legend = d3.select("#gradient-legend");
     // Add X axis
@@ -266,7 +266,7 @@
         .append("path")
           .attr("class", "myArea")
           // console.log("keyy",d[d["index"]][1]
-          .style("fill", function(d) {console.log("key: ", d.key, "color", color[missions_sorted.indexOf(d.key)]); return color[missions_sorted.indexOf(d.key)]; })
+          .style("fill", function(d) { return color[missions_sorted.indexOf(d.key)]; })
           .style("stroke", "white")
           .style("opacity", 1)
           .attr("d", area)

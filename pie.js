@@ -35,7 +35,6 @@ function pieChart(fileName) {
 
 
 
-
 // Scale of the color
   var color = d3.scaleOrdinal(d3.schemeSet2);
 
@@ -82,12 +81,9 @@ function pieChart(fileName) {
         .replaceAll(",", "");
     }
 
-
     d = data;
 
-
     var mousemove = function(event, d) {
-      // hoverTitle.text("Cost of " + d.data["key"] + ": $" + d.data["value"]+ "millions");
       d3.select(this)
       .attr('d', function(d){
         return d3.arc().innerRadius(0)

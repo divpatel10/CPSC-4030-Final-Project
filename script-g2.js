@@ -46,7 +46,6 @@ function barChart (fileName, hasFilter, filterName){
       color_map[d] = color[i-1];
     });
     
-    console.log("cmap", color_map)
     
   for (d in data){
     if(hasFilter){
@@ -60,6 +59,21 @@ function barChart (fileName, hasFilter, filterName){
     
     }
     }
+
+    var tooltip = d3.select("#barchart").append("div")
+                    .style("opacity", 0)
+                    .attr("class", "tooltip")
+                    .style("background-color", "#000")
+                    .style("border", "solid")
+                    .style("border-width", "2px")
+                    .style("border-radius", "5px")
+                    .style("color", "white")
+                    .style("padding", "5px")
+                    .style("position", "absolute")
+                    .style("overflow", "visible")
+
+
+
     // console.log("data before",data_before)
   const subgroups = Object.keys(data[0]).slice(1)
   const subgroups_uf = Object.keys(data_before[0]).slice(1)
@@ -117,7 +131,30 @@ function barChart (fileName, hasFilter, filterName){
   (data)
   var uf_stackedData = d3.stack()
   .keys(subgroups_uf)
-  (data_before)
+  (data_before);
+
+
+  // Three function that change the tooltip when user hover / move / leave a cell
+  var mouseover = function(d) {
+    var _data = d3.select(this).datum();
+    var subgroupValue = _data[1];
+    tooltip
+        .html("$ " + subgroupValue.toFixed(2) + " millions")
+        .style("opacity", 1)
+  }
+  var mousemove = function(event, d) {
+    tooltip.style("transform","translateY(-55%)")  
+    .style("left", ((event.x + 10)  + "px"))
+    .style("top", (event.y) + "px");
+           
+
+  }
+  var mouseleave = function(d) {
+    tooltip
+      .style("opacity", 0)
+  }
+
+
   // console.log("stacked", unfiltered_stackedData)
   // console.log(stackedData)
   // Show the bars
@@ -125,7 +162,7 @@ function barChart (fileName, hasFilter, filterName){
   .selectAll("g")
   .data(stackedData)
   .join("g")
-    .attr("fill", function(d){console.log("color val",color_map[d.key]); return color_map[d.key]})
+    .attr("fill", function(d){return color_map[d.key]})
     .attr("class", d => "myRect " + d.key ) 
     .selectAll("rect")
     .data(d => d)
@@ -136,7 +173,11 @@ function barChart (fileName, hasFilter, filterName){
       .attr("width",x.bandwidth())
       .attr("stroke", "black")
       .attr("stroke-width", "1px")
-  
+      .on("mouseover", mouseover)
+      .on("mousemove", mousemove)
+      .on("mouseleave", mouseleave)
+
+
       svg.selectAll("legends")
   .data(uf_stackedData)
   .enter()
@@ -145,6 +186,7 @@ function barChart (fileName, hasFilter, filterName){
   .attr("cy", function(d,i){ return 15 + i*20}) 
   .attr("r", 7)
   .style("fill", function(d){  return color_map[d.key]})
+
     svg.selectAll("mylabels")
     .data(uf_stackedData)
     .enter()
