@@ -91,7 +91,7 @@ function pieChart(fileName) {
       d3.select(this)
       .attr('d', function(d){
         return d3.arc().innerRadius(0)
-          .outerRadius(radius + 10)(d)
+          .outerRadius(radius - 15)(d)
       })
       .attr("stroke", "black");
 
