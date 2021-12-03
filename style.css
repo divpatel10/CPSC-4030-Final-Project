@@ -161,7 +161,7 @@ input:checked + .slider:before {
 
 #pieChart{
   margin-top: 25px ;
-  margin-left: -150px;
+  margin-left: -100px;
 }
 
 .view-all {
