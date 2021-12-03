@@ -138,6 +138,8 @@ function barChart (fileName, hasFilter, filterName){
   // Three function that change the tooltip when user hover / move / leave a cell
   var mouseover = function(d) {
     var _data = d3.select(this).datum();
+     d3.select(this).style("stroke", "black").style("stroke-width", 3)
+    .style("opacity", 1)
     var subgroupValue = _data[1];
     tooltip
         .html("$ " + subgroupValue.toFixed(2) + " millions")
@@ -153,6 +155,7 @@ function barChart (fileName, hasFilter, filterName){
   var mouseleave = function(d) {
     tooltip
       .style("opacity", 0)
+      d3.select(this).style("stroke", "black").style("stroke-width", 1)
   }
 
 
