@@ -67,6 +67,7 @@ function barChart (fileName, hasFilter, filterName){
                     .style("border", "solid")
                     .style("border-width", "2px")
                     .style("border-radius", "5px")
+                    .style("font-size", "16px")
                     .style("color", "white")
                     .style("padding", "5px")
                     .style("position", "absolute")
@@ -144,7 +145,7 @@ function barChart (fileName, hasFilter, filterName){
   }
   var mousemove = function(event, d) {
     tooltip.style("transform","translateY(-55%)")  
-    .style("left", ((event.x + 10)  + "px"))
+    .style("left", ((event.x + 20)  + "px"))
     .style("top", (event.y) + "px");
            
 
