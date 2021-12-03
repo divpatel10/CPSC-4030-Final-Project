@@ -187,22 +187,7 @@
         missions_sorted.push(total_sorted[i][0])
       }
 
-//     temp.push(['Cassini', +total_budget['Cassini']])
-//       console.log("total budget", missions_sorted.indexOf('Cassini'))
       console.log("total budget", total_sorted)
-
-      // Color Legend 
-      // var svgLegend = d3.select("#gradient-legend");
-      // var g_legend = svgLegend.append("g").attr("transform", "translate(" + 30 + ", 0)");
-
-      // var legend_xScale = d3.scaleLinear()
-      //                     .range([0, 200])
-      //                     .domain(d3.extent(total_sorted, function(d) { return d[1]; }))
-
-      // var legend_xAxis = d3.axisBottom(legend_xScale)
-      //                   .tickSize(135)  
-      //                   .tickValues(total_sorted.filter(d => d[1] % 50 === 0).map(d => d[1]))
-
 
       var legendRange = []
       var min_leg = Math.round(total_sorted[0][1]/50)*50;

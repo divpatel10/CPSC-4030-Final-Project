@@ -34,23 +34,9 @@ function pieChart(fileName) {
     .text("What is the cost distribution of " + fileName);
 
 
-    // var hoverTitle = d3
-    // .select("#pieChart")
-    // .append("text")
-    // .style("font", "20px sans-serif")
-    // .style("fill", "black")
-    // .attr("text-anchor", "middle")
-    // .style("background-color", "#000")
-
-    // .attr("dx", width / 2)
-    // .attr("dy", height - 5)
-   
-
 
 
 // Scale of the color
-  // var color = d3.scaleOrdinal()
-  // .range([ '#00bfff','#f4a460','#adff2f','#ff6347','#b0c4de','#ff00ff','#1e90ff','#f0e68c'  ]);
   var color = d3.scaleOrdinal(d3.schemeSet2);
 
 // Create the pie chart based on the data
