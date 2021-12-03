@@ -7,7 +7,7 @@ function pieChart(fileName) {
  height = document.querySelector('.thirdgraph').offsetHeight - margin.top - margin.bottom 
 
   // The radius of the pieplot is half the width or half the height (smallest one).
-  var radius = Math.min(width-50, height-50) / 2 - 30;
+  var radius = Math.min(width-110, height-110) / 2 ;
 
   // append the svg object to the div called 'pieChart'
   var svg = d3
@@ -34,16 +34,16 @@ function pieChart(fileName) {
     .text("What is the cost distribution of " + fileName);
 
 
-    var hoverTitle = d3
-    .select("#pieChart")
-    .append("text")
-    .style("font", "20px sans-serif")
-    .style("fill", "black")
-    .attr("text-anchor", "middle")
-    .style("background-color", "#000")
+    // var hoverTitle = d3
+    // .select("#pieChart")
+    // .append("text")
+    // .style("font", "20px sans-serif")
+    // .style("fill", "black")
+    // .attr("text-anchor", "middle")
+    // .style("background-color", "#000")
 
-    .attr("dx", width / 2)
-    .attr("dy", height - 5)
+    // .attr("dx", width / 2)
+    // .attr("dy", height - 5)
    
 
 
@@ -64,13 +64,14 @@ function pieChart(fileName) {
 
   var path = d3
     .arc()
-    .outerRadius(radius - 10)
+    .outerRadius(radius - 30)
     .innerRadius(0);
 
-  var label = d3
-    .arc()
-    .outerRadius(radius - 40)
-    .innerRadius(radius - 40);
+  var path_pos = d3
+  .arc()
+  .outerRadius(radius )
+  .innerRadius(120);
+
 
   d3.csv("./data/" + fileName + ".csv").then(function (d) {
     var dst = d.filter((d) => {
@@ -98,38 +99,13 @@ function pieChart(fileName) {
 
     d = data;
 
-    // console.log("d",data)
-
-    // svg.selectAll("legends")
-    // .data(data)
-    // .enter()
-    // .append("circle")
-    // .attr("cx", width - 160)
-    // .attr("cy", function(d,i){ return  i*20 - 30}) 
-    // .attr("r", 7)
-    // .style("fill", function (d) { console.log("reeeeee",d)
-    //   return color(d["key"]);
-    // })
-    //   svg.selectAll("mylabels")
-    //   .data(data)
-    //   .enter()
-    //   .append("text")
-    //     .attr("x", width - 150)
-    //     .attr("y", function(d,i){ return  i*20 - 30}) 
-    //     .style("fill", "black")
-    //     .text(function(d){ return d["key"]})
-    //     .attr("text-anchor", "left")
-    //     .style("alignment-baseline", "middle")
-    //     .style("font-size", "12px")
-  
-
 
     var mousemove = function(event, d) {
-      hoverTitle.text("Cost of " + d.data["key"] + ": $" + d.data["value"]+ "millions");
+      // hoverTitle.text("Cost of " + d.data["key"] + ": $" + d.data["value"]+ "millions");
       d3.select(this)
       .attr('d', function(d){
         return d3.arc().innerRadius(0)
-          .outerRadius(radius + 5)(d)
+          .outerRadius(radius + 10)(d)
       })
       .attr("stroke", "black");
 
@@ -142,7 +118,7 @@ function pieChart(fileName) {
       .transition(300)
       .attr('d', function(d){
         return d3.arc().innerRadius(0)
-          .outerRadius(radius - 5)(d)
+          .outerRadius(radius - 30)(d)
           
       })
       .attr("stroke", "none");
@@ -173,44 +149,51 @@ function pieChart(fileName) {
         barChart(fileName, true,data.data["key"] );
         // call new function here 
     })
+
+      // Add the polylines between chart and labels:
+arc
+.selectAll('allPolylines')
+.data(pie(d))
+.enter()
+.append('polyline')
+  .attr("stroke", "black")
+  .style("fill", "none")
+  .attr("stroke-width", 0.8)
+  .attr('points', function(d) {
+    var posA = path.centroid(d) 
+    var posB = path_pos.centroid(d) 
+    var posC = path_pos.centroid(d); 
+    var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2 
+    posC[0] = radius * 0.95 * (midangle < Math.PI ? 1 : -1);
+    return [posA, posB, posC]
+  })
+
+// Add the polylines between chart and labels:
+// Code inspired by Laxmikanta Nayak's pie chart at https://bl.ocks.org/laxmikanta415/dc33fe11344bf5568918ba690743e06f
+arc
+.selectAll('allLabels')
+.data(pie(d))
+.enter()
+.append('text')
+.style("font", "14px sans-serif")
+.style("font-weight", "300")
+.attr("stroke-width", 0.5)
+
+  .text( function(d) { return "$" + d.data["value"]+ " millions" } )
+  .attr('transform', function(d) {
+      var pos = path_pos.centroid(d);
+      var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
+      pos[0] = radius * 0.99 * (midangle < Math.PI ? 1 : -1);
+      return 'translate(' + pos+ ')';
+  })
+  .style('text-anchor', function(d) {
+      var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
+      return (midangle < Math.PI ? 'start' : 'end')
+  })
   });
 
 
-  // Add the polylines between chart and labels:
-// svg
-// .selectAll('allPolylines')
-// .data(data_ready)
-// .enter()
-// .append('polyline')
-//   .attr("stroke", "black")
-//   .style("fill", "none")
-//   .attr("stroke-width", 1)
-//   .attr('points', function(d) {
-//     var posA = arc.centroid(d) // line insertion in the slice
-//     var posB = outerArc.centroid(d) // line break: we use the other arc generator that has been built only for that
-//     var posC = outerArc.centroid(d); // Label position = almost the same as posB
-//     var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2 // we need the angle to see if the X position will be at the extreme right or extreme left
-//     posC[0] = radius * 0.95 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
-//     return [posA, posB, posC]
-//   })
 
-// // Add the polylines between chart and labels:
-// svg
-// .selectAll('allLabels')
-// .data(data_ready)
-// .enter()
-// .append('text')
-//   .text( function(d) { console.log(d.data.key) ; return d.data.key } )
-//   .attr('transform', function(d) {
-//       var pos = outerArc.centroid(d);
-//       var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
-//       pos[0] = radius * 0.99 * (midangle < Math.PI ? 1 : -1);
-//       return 'translate(' + pos + ')';
-//   })
-//   .style('text-anchor', function(d) {
-//       var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
-//       return (midangle < Math.PI ? 'start' : 'end')
-//   })
   
 }
 // Call the function for the first time for Cassini data
