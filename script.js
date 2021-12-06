@@ -265,6 +265,8 @@
         .enter()
         .append("path")
           .attr("class", "myArea")
+          .attr("cursor", "pointer")
+
           // console.log("keyy",d[d["index"]][1]
           .style("fill", function(d) { return color[missions_sorted.indexOf(d.key)]; })
           .style("stroke", "white")
