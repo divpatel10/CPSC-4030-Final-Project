@@ -1,23 +1,23 @@
 Official LCC,Fiscal Year,Development (inc. LV),Launch Vehicles,Operations,Data Analysis,Total Cost,Total Cost (inflation adj),Notes
-$820,2000,$18.9,,,,$18.9,$30.0,Official LCC: $645 million spacecraft development and science instruments; $100 million launch; $75 million mission operations and science processing
-,2001,$296.0,,,,$296.0,$453.8,
-,2002,$277.6,,,,$277.6,$414.2,
-,2003,$151.5,,$20.9,,$172.4,$254.4,Includes additional $15M for first extended ops: http://www.planetary.org/explore/space-topics/space-missions/mer-updates/2004/04-09-mer-update.html
-,2004,,,$26.4,$25.2,$51.6,$79.0,Landings: 3 and 24 January 2004. Ops estimate from FY03 PBR
-,2005,,,$30.3,$7.0,$30.3,$44.7,2 - 4th mission extensions totaled $91M. Source: https://web.archive.org/web/20071019042407/http://www.msnbc.msn.com/id/21327647/
-,2006,,,$30.3,,$30.3,$43.3,
-,2007,,,$30.3,,$30.3,$42.0,
-,2008,,,$20.0,,$20.0,$26.8,5th mission extension projection.
-,2009,,,$20.0,,$20.0,$26.0,
-,2010,,,$20.0,,$20.0,$25.5,Estimate. End of operations for the Spirit rover.
-,2011,,,$13.6,,$13.6,$17.0,
-,2012,,,$15.0,,$15.0,$18.4,
-,2013,,,$13.2,,$13.2,$15.9,
-,2014,,,$14.0,,$14.0,$16.5,
-,2015,,,$13.7,,$13.7,$15.9,
-,2016,,,$14.2,,$14.2,$16.1,
-,2017,,,$12.5,,$12.5,$13.9,
-,2018,,,$12.5,,$12.5,$13.5,End of operations for Opportunity rover
-,2019,,,$3.6,,$3.6,$3.8,
-Totals,,$744.0,$100,$310.6,$32.2,"$1,079.8","$1,570.6",LV cost estimate from press kit
+$820 ,2000,$18.90 ,,,,$18.90 ,$30.00 ,Official LCC: $645 million spacecraft development and science instruments; $100 million launch; $75 million mission operations and science processing
+,2001,$296.00 ,,,,$296.00 ,$453.80 ,
+,2002,$277.60 ,,,,$277.60 ,$414.20 ,
+,2003,$151.50 ,$100 ,$20.90 ,,$172.40 ,$254.40 ,Includes additional $15M for first extended ops: http://www.planetary.org/explore/space-topics/space-missions/mer-updates/2004/04-09-mer-update.html
+,2004,,,$26.40 ,$25.20 ,$51.60 ,$79.00 ,Landings: 3 and 24 January 2004. Ops estimate from FY03 PBR
+,2005,,,$30.30 ,$7.00 ,$30.30 ,$44.70 ,2 - 4th mission extensions totaled $91M. Source: https://web.archive.org/web/20071019042407/http://www.msnbc.msn.com/id/21327647/
+,2006,,,$30.30 ,,$30.30 ,$43.30 ,
+,2007,,,$30.30 ,,$30.30 ,$42.00 ,
+,2008,,,$20.00 ,,$20.00 ,$26.80 ,5th mission extension projection.
+,2009,,,$20.00 ,,$20.00 ,$26.00 ,
+,2010,,,$20.00 ,,$20.00 ,$25.50 ,Estimate. End of operations for the Spirit rover.
+,2011,,,$13.60 ,,$13.60 ,$17.00 ,
+,2012,,,$15.00 ,,$15.00 ,$18.40 ,
+,2013,,,$13.20 ,,$13.20 ,$15.90 ,
+,2014,,,$14.00 ,,$14.00 ,$16.50 ,
+,2015,,,$13.70 ,,$13.70 ,$15.90 ,
+,2016,,,$14.20 ,,$14.20 ,$16.10 ,
+,2017,,,$12.50 ,,$12.50 ,$13.90 ,
+,2018,,,$12.50 ,,$12.50 ,$13.50 ,End of operations for Opportunity rover
+,2019,,,$3.60 ,,$3.60 ,$3.80 ,
+Totals,,$744.00 ,$100 ,$310.60 ,$32.20 ,"$1,079.80 ","$1,570.60 ",LV cost estimate from press kit
 ,,64%,,27%,3%,,,% dev spent on formulation vs. implementation. % TOTAL on operations

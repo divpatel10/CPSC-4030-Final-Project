@@ -1,24 +1,24 @@
 Official LCC,Fiscal Year,Formulation,Implementation,Launch Services,Operations,Total Cost,Total Cost (inflation adj),Notes
-"$2,476",2002,$5.7,,,,$5.7,$8.5,Finall LCC and other useful data in the NASA OIG report: https://oig.nasa.gov/docs/IG-11-019.pdf
-,2003,$60.6,,,,$60.6,$88.5,Began formulation: September 2003
-,2004,$118.1,,,,$118.1,$166.6,Mission Concept Review: Oct 2003.
-,2005,$117.5,,,,$117.5,$160.9,
-,2006,$213.6,$37.4,,,$251.0,$333.1,"KDP-C: August 2006. Original LCC: $1.8 billion. Note: small adjustment to match final Formulation amount, slightly different than reported in FY2008."
-,2007,,$416.8,,,$416.8,$532.7,CDR: June 2007
-,2008,,$545.0,,,$545.0,$672.5,
-,2009,,$229.3,,,$229.3,$277.7,Project Rebaseline: 23 Feb 2009. Original launch date Sept 2009.
-,2010,,$258.4,,,$258.4,$308.8,
-,2011,,$242.9,,,$242.9,$285.7,
-,2012,,$174.0,,,$174.0,$202.4,Launch: Nov 26 2011. Landing Aug 2012.
-,2013,,,,$63.8,$63.8,$76.8,
-,2014,,,,$69.6,$69.6,$82.2,Prime mission end: Summer 2014
-,2015,,,,$63.5,$63.5,$73.5,
-,2016,,,,$50.3,$50.3,$57.0,
-,2017,,,,$56.2,$56.2,$62.4,
-,2018,,,,$51.4,$51.4,$55.7,
-,2019,,,,$51.1,$51.1,$53.9,
-,2020,,,,$47.0,$47.0,$47.0,
-,2021,,,,$47.5,$47.5,$47.5,
-,2022,,,,$45.0,$45.0,$45.0,
-Totals,,$515.5,"$1,903.8",$194.7,$545.4,"$2,964.7","$3,638.3",Launch cost estimate from: https://www.nasa.gov/centers/kennedy/news/releases/2006/release-20060602d.html
+"$2,476 ",2002,$5.70 ,,,,$5.70 ,$8.50 ,Finall LCC and other useful data in the NASA OIG report: https://oig.nasa.gov/docs/IG-11-019.pdf
+,2003,$60.60 ,,,,$60.60 ,$88.50 ,Began formulation: September 2003
+,2004,$118.10 ,,,,$118.10 ,$166.60 ,Mission Concept Review: Oct 2003.
+,2005,$117.50 ,,,,$117.50 ,$160.90 ,
+,2006,$213.60 ,$37.40 ,,,$251.00 ,$333.10 ,"KDP-C: August 2006. Original LCC: $1.8 billion. Note: small adjustment to match final Formulation amount, slightly different than reported in FY2008."
+,2007,,$416.80 ,,,$416.80 ,$532.70 ,CDR: June 2007
+,2008,,$545.00 ,,,$545.00 ,$672.50 ,
+,2009,,$229.30 ,,,$229.30 ,$277.70 ,Project Rebaseline: 23 Feb 2009. Original launch date Sept 2009.
+,2010,,$258.40 ,,,$258.40 ,$308.80 ,
+,2011,,$242.90 ,$194.70 ,,$242.90 ,$285.70 ,
+,2012,,$174.00 ,,,$174.00 ,$202.40 ,Launch: Nov 26 2011. Landing Aug 2012.
+,2013,,,,$63.80 ,$63.80 ,$76.80 ,
+,2014,,,,$69.60 ,$69.60 ,$82.20 ,Prime mission end: Summer 2014
+,2015,,,,$63.50 ,$63.50 ,$73.50 ,
+,2016,,,,$50.30 ,$50.30 ,$57.00 ,
+,2017,,,,$56.20 ,$56.20 ,$62.40 ,
+,2018,,,,$51.40 ,$51.40 ,$55.70 ,
+,2019,,,,$51.10 ,$51.10 ,$53.90 ,
+,2020,,,,$47.00 ,$47.00 ,$47.00 ,
+,2021,,,,$47.50 ,$47.50 ,$47.50 ,
+,2022,,,,$45.00 ,$45.00 ,$45.00 ,
+Totals,,$515.50 ,"$1,903.80 ",$194.70 ,$545.40 ,"$2,964.70 ","$3,638.30 ",Launch cost estimate from: https://www.nasa.gov/centers/kennedy/news/releases/2006/release-20060602d.html
 ,,21%,79%,,18%,,,% dev spent on formulation vs. implementation. % TOTAL on operations
