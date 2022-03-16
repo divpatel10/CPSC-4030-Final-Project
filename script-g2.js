@@ -11,6 +11,7 @@ function barChart (fileName, hasFilter, filterName){
   .attr("height", height + margin.top + margin.bottom )
   .append("g")
   .attr("transform", `translate(${margin.left},${margin.top})`);
+  
   d3.csv("./data/" + fileName + ".csv").then( function(data) {
   // Remove fields that are not required
   for(d in data){
